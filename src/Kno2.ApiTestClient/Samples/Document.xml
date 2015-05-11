@@ -1,0 +1,2369 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Xml File -->
+<ClinicalDocument xmlns="urn:hl7-org:v3">
+  <realmCode code="US"/>
+  <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+  <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
+  <templateId root="2.16.840.1.113883.10.20.22.1.8"/>
+  <id root="b94b0178-7e32-11e3-b810-bcc890787600"/>
+  <code code="18842-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Discharge Summarization Note"/>
+  <title>Sample XML File - Discharge Summary Document</title>
+  <effectiveTime value="20140217111647-0500"/>
+  <confidentialityCode nullFlavor="NI"/>
+  <languageCode code="en-US"/>
+  <recordTarget>
+    <patientRole>
+      <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="438743892" assigningAuthorityName="Good Health"/>
+      <addr use="HP">
+        <streetAddressLine>3162 Mustang Drive</streetAddressLine>
+        <city>WATERTOWN</city>
+        <state>MA</state>
+        <postalCode>97010</postalCode>
+        <country>US</country>
+        <useablePeriod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+          <low value="20000201000000"/>
+          <high value="20170530120000"/>
+        </useablePeriod>
+      </addr>
+      <telecom use="HP" value="tel:503-437-9523"/>
+      <telecom use="WP" value="tel:503-486-8271"/>
+      <telecom use="MC" value="tel:503-570-3300"/>
+      <telecom value="mailto:rick170314e1inp@worldmail.com"/>
+      <patient>
+        <name use="L">
+          <family>Kousky</family>
+          <given>Rick</given>
+          <prefix>Mr</prefix>
+        </name>
+        <administrativeGenderCode code="M" codeSystem="2.16.840.1.113883.5.1" codeSystemName="AdministrativeGenderCode" displayName="Male"/>
+        <birthTime value="19350213000000"/>
+        <maritalStatusCode code="M" codeSystem="2.16.840.1.113883.5.2" codeSystemName="MaritalStatus" displayName="Married"/>
+        <raceCode code="2106-3" codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC" displayName="White"/>
+        <ethnicGroupCode code="2186-5" codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC" displayName="Not Hispanic or Latino"/>
+        <languageCommunication>
+          <languageCode code="eng"/>
+          <preferenceInd value="true"/>
+        </languageCommunication>
+      </patient>
+    </patientRole>
+  </recordTarget>
+  <author typeCode="AUT">
+    <time value="20140115171647-0500"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id root="2.16.840.1.113883.3.86.3"/>
+      <addr nullFlavor="UNK"/>
+      <telecom nullFlavor="UNK"/>
+      <assignedAuthoringDevice>
+        <manufacturerModelName>InterSystems</manufacturerModelName>
+        <softwareName>InterSystems HealthShare</softwareName>
+      </assignedAuthoringDevice>
+      <representedOrganization>
+        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+        <name>Home Community</name>
+        <telecom use="WP" value="tel:(617) 621-0600"/>
+        <addr use="WP">
+          <streetAddressLine>One Memorial Drive</streetAddressLine>
+          <city>Cambridge</city>
+          <state>MA</state>
+          <postalCode>02142</postalCode>
+          <country>US</country>
+        </addr>
+      </representedOrganization>
+    </assignedAuthor>
+  </author>
+  <custodian>
+    <assignedCustodian>
+      <representedCustodianOrganization>
+        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+        <name>1.3.6.1.4.1.21367.2010.1.2.300</name>
+        <telecom use="WP" value="tel:(617) 621-0600"/>
+        <addr use="WP">
+          <streetAddressLine>One Memorial Drive</streetAddressLine>
+          <city>Cambridge</city>
+          <state>MA</state>
+          <postalCode>02142</postalCode>
+          <country>US</country>
+        </addr>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <legalAuthenticator>
+    <time value="20140115171647-0500"/>
+    <signatureCode code="S"/>
+    <assignedEntity>
+      <id nullFlavor="UNK"/>
+      <addr use="WP">
+        <streetAddressLine>One Memorial Drive</streetAddressLine>
+        <city>Cambridge</city>
+        <state>MA</state>
+        <postalCode>02142</postalCode>
+        <country>US</country>
+      </addr>
+      <telecom use="WP" value="tel:(617) 621-0600"/>
+      <assignedPerson>
+        <name use="L">
+          <family>InterSystems</family>
+          <given>HealthShare</given>
+        </name>
+      </assignedPerson>
+      <representedOrganization>
+        <id nullFlavor="UNK"/>
+        <name nullFlavor="UNK"/>
+        <telecom nullFlavor="UNK"/>
+        <addr nullFlavor="UNK"/>
+      </representedOrganization>
+    </assignedEntity>
+  </legalAuthenticator>
+  <documentationOf>
+    <serviceEvent classCode="PCPR">
+      <templateId root="2.16.840.1.113883.10.20.21.3.1"/>
+      <effectiveTime>
+        <low nullFlavor="UNK"/>
+        <high nullFlavor="UNK"/>
+      </effectiveTime>
+      <performer typeCode="PRF">
+        <functionCode code="PCP" codeSystem="2.16.840.1.113883.5.88" codeSystemName="ParticipationFunction" displayName="Primary Care Physician"/>
+        <time>
+          <low nullFlavor="UNK"/>
+          <high nullFlavor="UNK"/>
+        </time>
+        <assignedEntity classCode="ASSIGNED">
+          <id root="2.16.840.1.113883.3.86.3.1" extension="RODRIGUEZ"/>
+          <addr use="WP">
+            <streetAddressLine>Get Well Clinic</streetAddressLine>
+            <streetAddressLine>1002 Healthcare Dr.</streetAddressLine>
+            <city>Portland</city>
+            <state>OR</state>
+            <postalCode>97005</postalCode>
+          </addr>
+          <telecom use="WP" value="tel:+1-555-555-1122"/>
+          <assignedPerson>
+            <name use="L">
+              <family>Rodriguez</family>
+              <given>Martin</given>
+              <prefix>Dr.</prefix>
+            </name>
+          </assignedPerson>
+        </assignedEntity>
+      </performer>
+    </serviceEvent>
+  </documentationOf>
+  <componentOf>
+    <encompassingEncounter>
+      <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="170314E1INP" assigningAuthorityName="Local Community Hospital-EncounterId"/>
+      <code code="IMP" codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode" displayName="Inpatient"/>
+      <effectiveTime>
+        <low value="20121002110000"/>
+        <high value="20121005150000"/>
+      </effectiveTime>
+      <dischargeDispositionCode code="01" codeSystem="2.16.840.1.113883.12.112" codeSystemName="Discharge Disposition" displayName="Routine Discharge"/>
+      <location>
+        <healthCareFacility>
+          <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="EMERGENCY"/>
+          <serviceProviderOrganization>
+            <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+            <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+            <name>Local Community Hospital</name>
+            <telecom use="WP" value="tel:555-555-1002"/>
+            <telecom value="mailto:lch@othermail.com"/>
+            <addr use="WP">
+              <streetAddressLine>1000 Hospital Way</streetAddressLine>
+              <city>PORTLAND</city>
+              <state>OR</state>
+              <postalCode>97005</postalCode>
+              <country>US</country>
+            </addr>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.5"/>
+          <code code="11450-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Problem list"/>
+          <title>Problems</title>
+          <text>
+            <table border="1" width="100%">
+              <thead>
+                <tr>
+                  <th>Condition Name</th>
+                  <th>Condition Details</th>
+                  <th>Condition Category</th>
+                  <th>Status</th>
+                  <th>Onset Date</th>
+                  <th>Resolution Date</th>
+                  <th>Last Treatment Date</th>
+                  <th>Treating Clinician</th>
+                  <th>Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="problemNarrativeLink-1">
+                  <td>Sinusitis</td>
+                  <td ID="problemDescriptionLink-1"/>
+                  <td>Problem</td>
+                  <td ID="problemStatusLink-1">Active</td>
+                  <td>2012-09-20 11:10:00</td>
+                  <td/>
+                  <td>2012-10-02 11:10:00</td>
+                  <td/>
+                  <td ID="problemCommentsLink-1"/>
+                </tr>
+                <tr ID="problemNarrativeLink-2">
+                  <td>Depression</td>
+                  <td ID="problemDescriptionLink-2"/>
+                  <td>Problem</td>
+                  <td ID="problemStatusLink-2">Active</td>
+                  <td>2011-11-10 00:00:00</td>
+                  <td/>
+                  <td>2012-10-02 11:10:00</td>
+                  <td/>
+                  <td ID="problemCommentsLink-2"/>
+                </tr>
+                <tr ID="problemNarrativeLink-3">
+                  <td>Hypothyroidism</td>
+                  <td ID="problemDescriptionLink-3"/>
+                  <td>Problem</td>
+                  <td ID="problemStatusLink-3">Active</td>
+                  <td>2010-04-15 00:00:00</td>
+                  <td/>
+                  <td>2012-10-02 11:10:00</td>
+                  <td/>
+                  <td ID="problemCommentsLink-3"/>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.3"/>
+              <id nullFlavor="UNK"/>
+              <code code="CONC" codeSystem="2.16.840.1.113883.5.6"/>
+              <statusCode code="active"/>
+              <effectiveTime>
+                <low value="20120920111000"/>
+              </effectiveTime>
+              <author typeCode="AUT">
+                <time value="20121002111000"/>
+                <assignedAuthor classCode="ASSIGNED">
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="WXT"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name use="L">
+                      <family>Tambor</family>
+                      <given>Wat</given>
+                    </name>
+                  </assignedPerson>
+                </assignedAuthor>
+              </author>
+              <entryRelationship typeCode="SUBJ" inversionInd="false">
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+                  <id nullFlavor="NI"/>
+                  <code code="55607006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Problem">
+                    <originalText>Problem</originalText>
+                  </code>
+                  <text>
+                    <reference value="#problemDescriptionLink-1"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime>
+                    <low value="20120920111000"/>
+                  </effectiveTime>
+                  <value code="36971009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Sinusitis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                    <originalText>Sinusitis</originalText>
+                  </value>
+                  <entryRelationship typeCode="REFR" inversionInd="false">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.6"/>
+                      <code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"/>
+                      <text>
+                        <reference value="#problemStatusLink-1"/>
+                      </text>
+                      <statusCode code="completed"/>
+                      <value code="55561003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Active" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>Active</originalText>
+                        <translation code="A" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="Active"/>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </entryRelationship>
+            </act>
+          </entry>
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.3"/>
+              <id nullFlavor="UNK"/>
+              <code code="CONC" codeSystem="2.16.840.1.113883.5.6"/>
+              <statusCode code="active"/>
+              <effectiveTime>
+                <low value="20111110000000"/>
+              </effectiveTime>
+              <author typeCode="AUT">
+                <time value="20121002111000"/>
+                <assignedAuthor classCode="ASSIGNED">
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="WXT"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name use="L">
+                      <family>Tambor</family>
+                      <given>Wat</given>
+                    </name>
+                  </assignedPerson>
+                </assignedAuthor>
+              </author>
+              <entryRelationship typeCode="SUBJ" inversionInd="false">
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+                  <id nullFlavor="NI"/>
+                  <code code="55607006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Problem">
+                    <originalText>Problem</originalText>
+                  </code>
+                  <text>
+                    <reference value="#problemDescriptionLink-2"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime>
+                    <low value="20111110000000"/>
+                  </effectiveTime>
+                  <value code="35489007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Depression" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                    <originalText>Depression</originalText>
+                  </value>
+                  <entryRelationship typeCode="REFR" inversionInd="false">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.6"/>
+                      <code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"/>
+                      <text>
+                        <reference value="#problemStatusLink-2"/>
+                      </text>
+                      <statusCode code="completed"/>
+                      <value code="55561003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Active" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>Active</originalText>
+                        <translation code="A" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="Active"/>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </entryRelationship>
+            </act>
+          </entry>
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.3"/>
+              <id nullFlavor="UNK"/>
+              <code code="CONC" codeSystem="2.16.840.1.113883.5.6"/>
+              <statusCode code="active"/>
+              <effectiveTime>
+                <low value="20100415000000"/>
+              </effectiveTime>
+              <author typeCode="AUT">
+                <time value="20121002111000"/>
+                <assignedAuthor classCode="ASSIGNED">
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="WXT"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name use="L">
+                      <family>Tambor</family>
+                      <given>Wat</given>
+                    </name>
+                  </assignedPerson>
+                </assignedAuthor>
+              </author>
+              <entryRelationship typeCode="SUBJ" inversionInd="false">
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+                  <id nullFlavor="NI"/>
+                  <code code="55607006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Problem">
+                    <originalText>Problem</originalText>
+                  </code>
+                  <text>
+                    <reference value="#problemDescriptionLink-3"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime>
+                    <low value="20100415000000"/>
+                  </effectiveTime>
+                  <value code="40930008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Hypothyroidism" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                    <originalText>Hypothyroidism</originalText>
+                  </value>
+                  <entryRelationship typeCode="REFR" inversionInd="false">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.6"/>
+                      <code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"/>
+                      <text>
+                        <reference value="#problemStatusLink-3"/>
+                      </text>
+                      <statusCode code="completed"/>
+                      <value code="55561003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Active" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>Active</originalText>
+                        <translation code="A" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="Active"/>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </entryRelationship>
+            </act>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.43"/>
+          <code code="46241-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Hospital Admission Diagnoses"/>
+          <title>Hospital Admission Diagnoses</title>
+          <text>
+            <table border="1" width="100%">
+              <thead>
+                <tr>
+                  <th>Condition Name</th>
+                  <th>Status</th>
+                  <th>Diagnosis Date</th>
+                  <th>Treating Clinician</th>
+                  <th>Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="admissionDiagnosisNarrativeLink-1">
+                  <td ID="admissionDiagnosisDescriptionLink-1">Neoplasm of accessory sinus</td>
+                  <td ID="admissionDiagnosisStatusLink-1">Active</td>
+                  <td>2012-10-02 08:10:00</td>
+                  <td/>
+                  <td ID="admissionDiagnosisCommentsLink-1"/>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.34"/>
+              <id nullFlavor="UNK"/>
+              <code code="46241-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Hospital Admission Diagnosis"/>
+              <statusCode code="active"/>
+              <effectiveTime>
+                <low value="20121002081000"/>
+              </effectiveTime>
+              <informant>
+                <assignedEntity>
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="Local Community Hospital"/>
+                  <addr use="WP">
+                    <streetAddressLine>1000 Hospital Way</streetAddressLine>
+                    <city>PORTLAND</city>
+                    <state>OR</state>
+                    <postalCode>97005</postalCode>
+                    <country>US</country>
+                  </addr>
+                  <telecom use="WP" value="tel:555-555-1002"/>
+                  <telecom value="mailto:gwc@othermail.com"/>
+                  <assignedPerson>
+                    <name nullFlavor="UNK"/>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                    <name>Local Community Hospital</name>
+                    <telecom use="WP" value="tel:555-555-1002"/>
+                    <telecom value="mailto:gwc@othermail.com"/>
+                    <addr use="WP">
+                      <streetAddressLine>1000 Hospital Way</streetAddressLine>
+                      <city>PORTLAND</city>
+                      <state>OR</state>
+                      <postalCode>97005</postalCode>
+                      <country>US</country>
+                    </addr>
+                    <asOrganizationPartOf>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <wholeOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                        <name>Home Community</name>
+                        <telecom use="WP" value="tel:(617) 621-0600"/>
+                        <addr use="WP">
+                          <streetAddressLine>One Memorial Drive</streetAddressLine>
+                          <city>Cambridge</city>
+                          <state>MA</state>
+                          <postalCode>02142</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </representedOrganization>
+                </assignedEntity>
+              </informant>
+              <entryRelationship typeCode="SUBJ" inversionInd="false">
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+                  <id nullFlavor="NI"/>
+                  <code code="282291009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Diagnosis"/>
+                  <text>
+                    <reference value="#admissionDiagnosisDescriptionLink-1"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime>
+                    <low value="20121002081000"/>
+                  </effectiveTime>
+                  <value code="126675008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Neoplasm of accessory sinus" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                    <originalText>Neoplasm of accessory sinus</originalText>
+                  </value>
+                  <entryRelationship typeCode="REFR" inversionInd="false">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.6"/>
+                      <code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"/>
+                      <text>
+                        <reference value="#admissionDiagnosisStatusLink-1"/>
+                      </text>
+                      <statusCode code="completed"/>
+                      <value code="55561003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Active" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>Active</originalText>
+                        <translation code="A" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="Active"/>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </entryRelationship>
+              <entryRelationship typeCode="SUBJ" inversionInd="true">
+                <encounter classCode="ENC" moodCode="EVN">
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="170314E1INP"/>
+                </encounter>
+              </entryRelationship>
+            </act>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.24"/>
+          <code code="11535-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Hospital Discharge Diagnoses"/>
+          <title>Hospital Discharge Diagnoses</title>
+          <text>This patient has no known discharge diagnoses.</text>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.6"/>
+          <code code="48765-2" displayName="Allergies, Adverse Reactions, Alerts" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+          <title>Allergies, Adverse Reactions, Alerts</title>
+          <text>
+            <table border="1" width="100%">
+              <thead>
+                <tr>
+                  <th>Allergy Name</th>
+                  <th>Allergy Type</th>
+                  <th>Status</th>
+                  <th>Severity</th>
+                  <th>Reaction(s)</th>
+                  <th>Onset Date</th>
+                  <th>Treating Clinician</th>
+                  <th>Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="allergyNarrativeLink-1">
+                  <td ID="allergyAllergenLink-1">Penicillin G benzathine</td>
+                  <td ID="allergyTypeLink-1">Drug allergy</td>
+                  <td ID="allergyStatusLink-1">Active</td>
+                  <td>Moderate</td>
+                  <td ID="allergyReactionLink-1">Hives</td>
+                  <td>2000-01-01 00:00:00</td>
+                  <td/>
+                  <td ID="allergyCommentsLink-1"/>
+                </tr>
+                <tr ID="allergyNarrativeLink-2">
+                  <td ID="allergyAllergenLink-2">Aspirin</td>
+                  <td ID="allergyTypeLink-2">Drug allergy</td>
+                  <td ID="allergyStatusLink-2">Active</td>
+                  <td>Moderate</td>
+                  <td ID="allergyReactionLink-2">Nausea</td>
+                  <td>2001-01-01 00:00:00</td>
+                  <td/>
+                  <td ID="allergyCommentsLink-2"/>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.30"/>
+              <id nullFlavor="UNK"/>
+              <code code="48765-2" displayName="Allergies, Adverse Reactions, Alerts" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+              <text>
+                <reference value="#allergyNarrativeLink-1"/>
+              </text>
+              <statusCode code="active"/>
+              <effectiveTime>
+                <low value="20000101000000"/>
+              </effectiveTime>
+              <informant>
+                <assignedEntity>
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="Local Community Hospital"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name nullFlavor="UNK"/>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                    <name>Local Community Hospital</name>
+                    <telecom nullFlavor="UNK"/>
+                    <addr nullFlavor="UNK"/>
+                    <asOrganizationPartOf>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <wholeOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                        <name>Home Community</name>
+                        <telecom use="WP" value="tel:(617) 621-0600"/>
+                        <addr use="WP">
+                          <streetAddressLine>One Memorial Drive</streetAddressLine>
+                          <city>Cambridge</city>
+                          <state>MA</state>
+                          <postalCode>02142</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </representedOrganization>
+                </assignedEntity>
+              </informant>
+              <entryRelationship typeCode="SUBJ" inversionInd="false">
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.7"/>
+                  <id nullFlavor="UNK"/>
+                  <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+                  <statusCode code="completed"/>
+                  <effectiveTime>
+                    <low value="20000101000000"/>
+                    <high nullFlavor="UNK"/>
+                  </effectiveTime>
+                  <value code="416098002" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Drug allergy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                    <originalText>
+                      <reference value="#allergyTypeLink-1"/>
+                    </originalText>
+                  </value>
+                  <participant typeCode="CSM">
+                    <participantRole classCode="MANU">
+                      <addr nullFlavor="UNK"/>
+                      <telecom nullFlavor="UNK"/>
+                      <playingEntity classCode="MMAT">
+                        <code code="7982" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Penicillin G benzathine">
+                          <originalText>
+                            <reference value="#allergyAllergenLink-1"/>
+                          </originalText>
+                        </code>
+                        <name>Penicillin G benzathine</name>
+                      </playingEntity>
+                    </participantRole>
+                  </participant>
+                  <entryRelationship typeCode="MFST" inversionInd="true">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.9"/>
+                      <id nullFlavor="UNK"/>
+                      <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+                      <text>
+                        <reference value="#allergyReactionLink-1"/>
+                      </text>
+                      <statusCode code="completed"/>
+                      <effectiveTime>
+                        <low value="20000101000000"/>
+                        <high nullFlavor="UNK"/>
+                      </effectiveTime>
+                      <value code="247472004" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Hives" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>Hives</originalText>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                  <entryRelationship typeCode="SUBJ" inversionInd="true">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.8"/>
+                      <code code="SEV" codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode" displayName="Severity observation"/>
+                      <statusCode code="completed"/>
+                      <value code="6736007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Moderate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>Moderate</originalText>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                  <entryRelationship typeCode="REFR" inversionInd="true">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.28"/>
+                      <code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                      <text>
+                        <reference value="#allergyStatusLink-1"/>
+                      </text>
+                      <statusCode code="completed"/>
+                      <value code="55561003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Active" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CE">
+                        <originalText>Active</originalText>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </entryRelationship>
+            </act>
+          </entry>
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.30"/>
+              <id nullFlavor="UNK"/>
+              <code code="48765-2" displayName="Allergies, Adverse Reactions, Alerts" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+              <text>
+                <reference value="#allergyNarrativeLink-2"/>
+              </text>
+              <statusCode code="active"/>
+              <effectiveTime>
+                <low value="20010101000000"/>
+              </effectiveTime>
+              <author typeCode="AUT">
+                <time value="20121002111500"/>
+                <assignedAuthor classCode="ASSIGNED">
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="JWW"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name use="L">
+                      <family>W Watson</family>
+                      <given>John</given>
+                    </name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                    <name>Local Community Hospital</name>
+                    <telecom use="WP" value="tel:555-555-1002"/>
+                    <telecom value="mailto:gwc@othermail.com"/>
+                    <addr use="WP">
+                      <streetAddressLine>1002 Healthcare Dr.</streetAddressLine>
+                      <city>PORTLAND</city>
+                      <state>OR</state>
+                      <postalCode>97005</postalCode>
+                      <country>US</country>
+                    </addr>
+                    <asOrganizationPartOf>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <wholeOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                        <name>Home Community</name>
+                        <telecom use="WP" value="tel:(617) 621-0600"/>
+                        <addr use="WP">
+                          <streetAddressLine>One Memorial Drive</streetAddressLine>
+                          <city>Cambridge</city>
+                          <state>MA</state>
+                          <postalCode>02142</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+              <informant>
+                <assignedEntity>
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="Local Community Hospital"/>
+                  <addr use="WP">
+                    <streetAddressLine>1002 Healthcare Dr.</streetAddressLine>
+                    <city>PORTLAND</city>
+                    <state>OR</state>
+                    <postalCode>97005</postalCode>
+                    <country>US</country>
+                  </addr>
+                  <telecom use="WP" value="tel:555-555-1002"/>
+                  <telecom value="mailto:gwc@othermail.com"/>
+                  <assignedPerson>
+                    <name nullFlavor="UNK"/>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                    <name>Local Community Hospital</name>
+                    <telecom use="WP" value="tel:555-555-1002"/>
+                    <telecom value="mailto:gwc@othermail.com"/>
+                    <addr use="WP">
+                      <streetAddressLine>1002 Healthcare Dr.</streetAddressLine>
+                      <city>PORTLAND</city>
+                      <state>OR</state>
+                      <postalCode>97005</postalCode>
+                      <country>US</country>
+                    </addr>
+                    <asOrganizationPartOf>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <wholeOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                        <name>Home Community</name>
+                        <telecom use="WP" value="tel:(617) 621-0600"/>
+                        <addr use="WP">
+                          <streetAddressLine>One Memorial Drive</streetAddressLine>
+                          <city>Cambridge</city>
+                          <state>MA</state>
+                          <postalCode>02142</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </representedOrganization>
+                </assignedEntity>
+              </informant>
+              <entryRelationship typeCode="SUBJ" inversionInd="false">
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.7"/>
+                  <id nullFlavor="UNK"/>
+                  <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+                  <statusCode code="completed"/>
+                  <effectiveTime>
+                    <low value="20010101000000"/>
+                    <high nullFlavor="UNK"/>
+                  </effectiveTime>
+                  <value code="416098002" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Drug allergy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                    <originalText>
+                      <reference value="#allergyTypeLink-2"/>
+                    </originalText>
+                  </value>
+                  <participant typeCode="CSM">
+                    <participantRole classCode="MANU">
+                      <addr nullFlavor="UNK"/>
+                      <telecom nullFlavor="UNK"/>
+                      <playingEntity classCode="MMAT">
+                        <code code="1191" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Aspirin">
+                          <originalText>
+                            <reference value="#allergyAllergenLink-2"/>
+                          </originalText>
+                        </code>
+                        <name>Aspirin</name>
+                      </playingEntity>
+                    </participantRole>
+                  </participant>
+                  <entryRelationship typeCode="MFST" inversionInd="true">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.9"/>
+                      <id nullFlavor="UNK"/>
+                      <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+                      <text>
+                        <reference value="#allergyReactionLink-2"/>
+                      </text>
+                      <statusCode code="completed"/>
+                      <effectiveTime>
+                        <low value="20010101000000"/>
+                        <high nullFlavor="UNK"/>
+                      </effectiveTime>
+                      <value code="422587007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Nausea" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>Nausea</originalText>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                  <entryRelationship typeCode="SUBJ" inversionInd="true">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.8"/>
+                      <code code="SEV" codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode" displayName="Severity observation"/>
+                      <statusCode code="completed"/>
+                      <value code="6736007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Moderate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>Moderate</originalText>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                  <entryRelationship typeCode="REFR" inversionInd="true">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.28"/>
+                      <code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                      <text>
+                        <reference value="#allergyStatusLink-2"/>
+                      </text>
+                      <statusCode code="completed"/>
+                      <value code="55561003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Active" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CE">
+                        <originalText>Active</originalText>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </entryRelationship>
+            </act>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.17"/>
+          <code code="29762-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+          <title>Social History</title>
+          <text>
+            <table border="1" width="100%">
+              <thead>
+                <tr>
+                  <th>Smoking Status</th>
+                  <th>Start Date</th>
+                  <th>Stop Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="socialHistoryNarrativeLink-1">
+                  <td ID="socialHistorySocialHabitLink-1">Never smoker</td>
+                  <td/>
+                  <td/>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry typeCode="DRIV">
+            <observation classCode="OBS" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.78"/>
+              <id nullFlavor="UNK"/>
+              <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+              <statusCode code="completed"/>
+              <effectiveTime>
+                <low nullFlavor="NA"/>
+              </effectiveTime>
+              <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD" code="266919005" displayName="Never smoker" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+                <originalText>
+                  <reference value="#socialHistorySocialHabitLink-1"/>
+                </originalText>
+              </value>
+              <author typeCode="AUT">
+                <time value="20121002111500"/>
+                <assignedAuthor classCode="ASSIGNED">
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="SLL"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name use="L">
+                      <family>Lindsey</family>
+                      <given>Sara</given>
+                    </name>
+                  </assignedPerson>
+                </assignedAuthor>
+              </author>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.11"/>
+          <code code="10183-2" displayName="HOSPITAL DISCHARGE MEDICATIONS" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+          <title>Hospital Discharge Medications</title>
+          <text>
+            <table border="1" width="100%">
+              <thead>
+                <tr>
+                  <th>Ordered Medication Name</th>
+                  <th>Filled Medication Name</th>
+                  <th>Start Date</th>
+                  <th>Stop Date</th>
+                  <th>Current Medication?</th>
+                  <th>Ordering Clinician</th>
+                  <th>Indication</th>
+                  <th>Dosage</th>
+                  <th>Frequency</th>
+                  <th>Signature (SIG)</th>
+                  <th>Comments</th>
+                  <th>Components</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="dischargeMedicationNarrativeLink-1">
+                  <td ID="dischargeMedicationOrderedNameLink-1">Fluoxetine 40 MG Oral Capsule</td>
+                  <td ID="dischargeMedicationFilledNameLink-1"/>
+                  <td>2011-11-10 00:00:00</td>
+                  <td/>
+                  <td>Yes</td>
+                  <td/>
+                  <td ID="dischargeMedicationIndicationLink-1">Depression</td>
+                  <td>40MG</td>
+                  <td>Daily</td>
+                  <td ID="dischargeMedicationSignatureLink-1">once daily</td>
+                  <td ID="dischargeMedicationCommentsLink-1"/>
+                  <td/>
+                </tr>
+                <tr ID="dischargeMedicationNarrativeLink-2">
+                  <td ID="dischargeMedicationOrderedNameLink-2">Levothyroxine Sodium 0.05MG Oral Tablet [Synthroid]</td>
+                  <td ID="dischargeMedicationFilledNameLink-2">Levothyroxine Sodium 0.05MG Oral Tablet [Synthroid]</td>
+                  <td>2010-04-15 00:00:00</td>
+                  <td/>
+                  <td>Yes</td>
+                  <td/>
+                  <td ID="dischargeMedicationIndicationLink-2">Hypothyroidism</td>
+                  <td>.05MG</td>
+                  <td>Daily</td>
+                  <td ID="dischargeMedicationSignatureLink-2">once daily</td>
+                  <td ID="dischargeMedicationCommentsLink-2"/>
+                  <td/>
+                </tr>
+                <tr ID="dischargeMedicationNarrativeLink-3">
+                  <td ID="dischargeMedicationOrderedNameLink-3">Cefepime 20 MG/ML</td>
+                  <td ID="dischargeMedicationFilledNameLink-3">Cefepime 20 MG/ML</td>
+                  <td>2012-10-02 11:45:00</td>
+                  <td>2012-10-03 11:45:00</td>
+                  <td>No</td>
+                  <td>Martin Green</td>
+                  <td ID="dischargeMedicationIndicationLink-3">Sinusitis</td>
+                  <td>1GRAM</td>
+                  <td>4 Times Daily</td>
+                  <td ID="dischargeMedicationSignatureLink-3">IV drip 1 gram every 12 hours</td>
+                  <td ID="dischargeMedicationCommentsLink-3"/>
+                  <td/>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.35"/>
+              <id nullFlavor="UNK"/>
+              <code code="10183-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Discharge medication"/>
+              <statusCode code="completed"/>
+              <entryRelationship typeCode="SUBJ">
+                <substanceAdministration classCode="SBADM" moodCode="INT">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+                  <id nullFlavor="UNK"/>
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI95142" assigningAuthorityName="Local Community Hospital-PlacerId"/>
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI66432" assigningAuthorityName="Local Community Hospital-FillerId"/>
+                  <code nullFlavor="NA"/>
+                  <text>
+                    <reference value="#dischargeMedicationSignatureLink-1"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+                    <low value="20111110000000"/>
+                    <high nullFlavor="UNK"/>
+                  </effectiveTime>
+                  <effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PIVL_TS" institutionSpecified="true" operator="A">
+                    <period value="1" unit="d"/>
+                  </effectiveTime>
+                  <routeCode code="C38288" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus" displayName="Oral"/>
+                  <doseQuantity value="40" unit="MG"/>
+                  <rateQuantity value="40" unit="MG"/>
+                  <consumable typeCode="CSM">
+                    <manufacturedProduct classCode="MANU">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+                      <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                        <code code="313989" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Fluoxetine 40 MG Oral Capsule">
+                          <originalText>
+                            <reference value="#dischargeMedicationOrderedNameLink-1"/>
+                          </originalText>
+                          <translation code="313989" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Fluoxetine 40 MG Oral Capsule"/>
+                        </code>
+                        <name>Fluoxetine 40 MG Oral Capsule</name>
+                      </manufacturedMaterial>
+                    </manufacturedProduct>
+                  </consumable>
+                  <author typeCode="AUT">
+                    <time value="20121002114500"/>
+                    <assignedAuthor classCode="ASSIGNED">
+                      <id root="2.16.840.1.113883.3.86.3.1" extension="SLL"/>
+                      <addr nullFlavor="UNK"/>
+                      <telecom nullFlavor="UNK"/>
+                      <assignedPerson>
+                        <name use="L">
+                          <family>L Lindsey</family>
+                          <given>Sara</given>
+                        </name>
+                      </assignedPerson>
+                      <representedOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                        <name>Local Community Hospital</name>
+                        <telecom nullFlavor="UNK"/>
+                        <addr nullFlavor="UNK"/>
+                        <asOrganizationPartOf>
+                          <effectiveTime nullFlavor="UNK"/>
+                          <wholeOrganization>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                            <name>Home Community</name>
+                            <telecom use="WP" value="tel:(617) 621-0600"/>
+                            <addr use="WP">
+                              <streetAddressLine>One Memorial Drive</streetAddressLine>
+                              <city>Cambridge</city>
+                              <state>MA</state>
+                              <postalCode>02142</postalCode>
+                              <country>US</country>
+                            </addr>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </representedOrganization>
+                    </assignedAuthor>
+                  </author>
+                  <informant>
+                    <assignedEntity>
+                      <id root="2.16.840.1.113883.3.86.3.1" extension="Local Community Hospital"/>
+                      <addr nullFlavor="UNK"/>
+                      <telecom nullFlavor="UNK"/>
+                      <assignedPerson>
+                        <name nullFlavor="UNK"/>
+                      </assignedPerson>
+                      <representedOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                        <name>Local Community Hospital</name>
+                        <telecom nullFlavor="UNK"/>
+                        <addr nullFlavor="UNK"/>
+                        <asOrganizationPartOf>
+                          <effectiveTime nullFlavor="UNK"/>
+                          <wholeOrganization>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                            <name>Home Community</name>
+                            <telecom use="WP" value="tel:(617) 621-0600"/>
+                            <addr use="WP">
+                              <streetAddressLine>One Memorial Drive</streetAddressLine>
+                              <city>Cambridge</city>
+                              <state>MA</state>
+                              <postalCode>02142</postalCode>
+                              <country>US</country>
+                            </addr>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </representedOrganization>
+                    </assignedEntity>
+                  </informant>
+                  <entryRelationship typeCode="REFR" inversionInd="false">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.1.57"/>
+                      <templateId root="2.16.840.1.113883.10.20.1.47"/>
+                      <code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                      <statusCode code="completed"/>
+                      <value code="55561003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Active" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>Active</originalText>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                  <entryRelationship typeCode="RSON">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.19"/>
+                      <id nullFlavor="UNK"/>
+                      <code code="55607006" displayName="Problem" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                      <statusCode code="completed"/>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <value nullFlavor="OTH" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>
+                          <reference value="#dischargeMedicationIndicationLink-1"/>
+                        </originalText>
+                        <translation code="Depression" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="Depression"/>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                  <entryRelationship typeCode="REFR">
+                    <supply classCode="SPLY" moodCode="INT">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.17"/>
+                      <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI95142" assigningAuthorityName="Local Community Hospital-PlacerId"/>
+                      <statusCode code="completed"/>
+                      <repeatNumber value="101"/>
+                      <product typeCode="PRD">
+                        <manufacturedProduct classCode="MANU">
+                          <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+                          <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                            <code code="313989" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Fluoxetine 40 MG Oral Capsule">
+                              <originalText>
+                                <reference value="#dischargeMedicationOrderedNameLink-1"/>
+                              </originalText>
+                              <translation code="313989" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Fluoxetine 40 MG Oral Capsule"/>
+                            </code>
+                            <name>Fluoxetine 40 MG Oral Capsule</name>
+                          </manufacturedMaterial>
+                        </manufacturedProduct>
+                      </product>
+                    </supply>
+                  </entryRelationship>
+                </substanceAdministration>
+              </entryRelationship>
+            </act>
+          </entry>
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.35"/>
+              <id nullFlavor="UNK"/>
+              <code code="10183-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Discharge medication"/>
+              <statusCode code="completed"/>
+              <entryRelationship typeCode="SUBJ">
+                <substanceAdministration classCode="SBADM" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+                  <id nullFlavor="UNK"/>
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI37483" assigningAuthorityName="Local Community Hospital-PlacerId"/>
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI95046" assigningAuthorityName="Local Community Hospital-FillerId"/>
+                  <code nullFlavor="NA"/>
+                  <text>
+                    <reference value="#dischargeMedicationSignatureLink-2"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+                    <low value="20100415000000"/>
+                    <high nullFlavor="UNK"/>
+                  </effectiveTime>
+                  <effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PIVL_TS" institutionSpecified="true" operator="A">
+                    <period value="1" unit="d"/>
+                  </effectiveTime>
+                  <routeCode code="C38288" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus" displayName="Oral"/>
+                  <doseQuantity value=".05" unit="MG"/>
+                  <rateQuantity value=".05" unit="MG"/>
+                  <consumable typeCode="CSM">
+                    <manufacturedProduct classCode="MANU">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+                      <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                        <code code="966247" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Levothyroxine Sodium 0.05MG Oral Tablet [Synthroid]">
+                          <originalText>
+                            <reference value="#dischargeMedicationOrderedNameLink-2"/>
+                          </originalText>
+                          <translation code="966247" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Levothyroxine Sodium 0.05MG Oral Tablet [Synthroid]"/>
+                        </code>
+                        <name>Levothyroxine Sodium 0.05MG Oral Tablet [Synthroid]</name>
+                      </manufacturedMaterial>
+                    </manufacturedProduct>
+                  </consumable>
+                  <author typeCode="AUT">
+                    <time value="20121002114500"/>
+                    <assignedAuthor classCode="ASSIGNED">
+                      <id root="2.16.840.1.113883.3.86.3.1" extension="SLL"/>
+                      <addr nullFlavor="UNK"/>
+                      <telecom nullFlavor="UNK"/>
+                      <assignedPerson>
+                        <name use="L">
+                          <family>L Lindsey</family>
+                          <given>Sara</given>
+                        </name>
+                      </assignedPerson>
+                      <representedOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                        <name>Local Community Hospital</name>
+                        <telecom nullFlavor="UNK"/>
+                        <addr nullFlavor="UNK"/>
+                        <asOrganizationPartOf>
+                          <effectiveTime nullFlavor="UNK"/>
+                          <wholeOrganization>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                            <name>Home Community</name>
+                            <telecom use="WP" value="tel:(617) 621-0600"/>
+                            <addr use="WP">
+                              <streetAddressLine>One Memorial Drive</streetAddressLine>
+                              <city>Cambridge</city>
+                              <state>MA</state>
+                              <postalCode>02142</postalCode>
+                              <country>US</country>
+                            </addr>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </representedOrganization>
+                    </assignedAuthor>
+                  </author>
+                  <informant>
+                    <assignedEntity>
+                      <id root="2.16.840.1.113883.3.86.3.1" extension="Local Community Hospital"/>
+                      <addr nullFlavor="UNK"/>
+                      <telecom nullFlavor="UNK"/>
+                      <assignedPerson>
+                        <name nullFlavor="UNK"/>
+                      </assignedPerson>
+                      <representedOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                        <name>Local Community Hospital</name>
+                        <telecom nullFlavor="UNK"/>
+                        <addr nullFlavor="UNK"/>
+                        <asOrganizationPartOf>
+                          <effectiveTime nullFlavor="UNK"/>
+                          <wholeOrganization>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                            <name>Home Community</name>
+                            <telecom use="WP" value="tel:(617) 621-0600"/>
+                            <addr use="WP">
+                              <streetAddressLine>One Memorial Drive</streetAddressLine>
+                              <city>Cambridge</city>
+                              <state>MA</state>
+                              <postalCode>02142</postalCode>
+                              <country>US</country>
+                            </addr>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </representedOrganization>
+                    </assignedEntity>
+                  </informant>
+                  <entryRelationship typeCode="REFR" inversionInd="false">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.1.57"/>
+                      <templateId root="2.16.840.1.113883.10.20.1.47"/>
+                      <code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                      <statusCode code="completed"/>
+                      <value code="55561003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Active" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>Active</originalText>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                  <entryRelationship typeCode="RSON">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.19"/>
+                      <id nullFlavor="UNK"/>
+                      <code code="55607006" displayName="Problem" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                      <statusCode code="completed"/>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <value nullFlavor="OTH" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>
+                          <reference value="#dischargeMedicationIndicationLink-2"/>
+                        </originalText>
+                        <translation code="Hypothyroidism" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="Hypothyroidism"/>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                  <entryRelationship typeCode="REFR">
+                    <supply classCode="SPLY" moodCode="INT">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.17"/>
+                      <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI37483" assigningAuthorityName="Local Community Hospital-PlacerId"/>
+                      <statusCode code="completed"/>
+                      <repeatNumber value="101"/>
+                      <product typeCode="PRD">
+                        <manufacturedProduct classCode="MANU">
+                          <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+                          <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                            <code code="966247" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Levothyroxine Sodium 0.05MG Oral Tablet [Synthroid]">
+                              <originalText>
+                                <reference value="#dischargeMedicationOrderedNameLink-2"/>
+                              </originalText>
+                              <translation code="966247" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Levothyroxine Sodium 0.05MG Oral Tablet [Synthroid]"/>
+                            </code>
+                            <name>Levothyroxine Sodium 0.05MG Oral Tablet [Synthroid]</name>
+                          </manufacturedMaterial>
+                        </manufacturedProduct>
+                      </product>
+                    </supply>
+                  </entryRelationship>
+                  <entryRelationship typeCode="REFR">
+                    <supply classCode="SPLY" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.18"/>
+                      <id nullFlavor="UNK" extension="Local Community Hospital-UnspecifiedPrescriptionNumber"/>
+                      <statusCode code="completed"/>
+                      <repeatNumber value="101"/>
+                      <quantity value=".05" unit="MG"/>
+                      <product typeCode="PRD">
+                        <manufacturedProduct classCode="MANU">
+                          <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+                          <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                            <code code="966247" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Levothyroxine Sodium 0.05MG Oral Tablet [Synthroid]">
+                              <originalText>
+                                <reference value="#dischargeMedicationFilledNameLink-2"/>
+                              </originalText>
+                              <translation code="966247" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Levothyroxine Sodium 0.05MG Oral Tablet [Synthroid]"/>
+                            </code>
+                            <name>Synthroid</name>
+                          </manufacturedMaterial>
+                        </manufacturedProduct>
+                      </product>
+                    </supply>
+                  </entryRelationship>
+                </substanceAdministration>
+              </entryRelationship>
+            </act>
+          </entry>
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.35"/>
+              <id nullFlavor="UNK"/>
+              <code code="10183-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Discharge medication"/>
+              <statusCode code="completed"/>
+              <entryRelationship typeCode="SUBJ">
+                <substanceAdministration classCode="SBADM" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+                  <id nullFlavor="UNK"/>
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI69550" assigningAuthorityName="Local Community Hospital-PlacerId"/>
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI51361" assigningAuthorityName="Local Community Hospital-FillerId"/>
+                  <code nullFlavor="NA"/>
+                  <text>
+                    <reference value="#dischargeMedicationSignatureLink-3"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+                    <low value="20121002114500"/>
+                    <high value="20121003114500"/>
+                  </effectiveTime>
+                  <effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PIVL_TS" institutionSpecified="true" operator="A">
+                    <period value="6" unit="h"/>
+                  </effectiveTime>
+                  <routeCode code="C38276" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus" displayName="Intravenous"/>
+                  <doseQuantity value="1" unit="GRAM"/>
+                  <rateQuantity value="1" unit="MG"/>
+                  <consumable typeCode="CSM">
+                    <manufacturedProduct classCode="MANU">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+                      <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                        <code code="329646" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Cefepime 20 MG/ML">
+                          <originalText>
+                            <reference value="#dischargeMedicationOrderedNameLink-3"/>
+                          </originalText>
+                          <translation code="329646" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Cefepime 20 MG/ML"/>
+                        </code>
+                        <name>Cefepime 20 MG/ML</name>
+                      </manufacturedMaterial>
+                    </manufacturedProduct>
+                  </consumable>
+                  <author typeCode="AUT">
+                    <time value="20121002114500"/>
+                    <assignedAuthor classCode="ASSIGNED">
+                      <id root="2.16.840.1.113883.3.86.3.1" extension="SLL"/>
+                      <addr nullFlavor="UNK"/>
+                      <telecom nullFlavor="UNK"/>
+                      <assignedPerson>
+                        <name use="L">
+                          <family>L Lindsey</family>
+                          <given>Sara</given>
+                        </name>
+                      </assignedPerson>
+                      <representedOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                        <name>Local Community Hospital</name>
+                        <telecom nullFlavor="UNK"/>
+                        <addr nullFlavor="UNK"/>
+                        <asOrganizationPartOf>
+                          <effectiveTime nullFlavor="UNK"/>
+                          <wholeOrganization>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                            <name>Home Community</name>
+                            <telecom use="WP" value="tel:(617) 621-0600"/>
+                            <addr use="WP">
+                              <streetAddressLine>One Memorial Drive</streetAddressLine>
+                              <city>Cambridge</city>
+                              <state>MA</state>
+                              <postalCode>02142</postalCode>
+                              <country>US</country>
+                            </addr>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </representedOrganization>
+                    </assignedAuthor>
+                  </author>
+                  <informant>
+                    <assignedEntity>
+                      <id root="2.16.840.1.113883.3.86.3.1" extension="Local Community Hospital"/>
+                      <addr nullFlavor="UNK"/>
+                      <telecom nullFlavor="UNK"/>
+                      <assignedPerson>
+                        <name nullFlavor="UNK"/>
+                      </assignedPerson>
+                      <representedOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                        <name>Local Community Hospital</name>
+                        <telecom nullFlavor="UNK"/>
+                        <addr nullFlavor="UNK"/>
+                        <asOrganizationPartOf>
+                          <effectiveTime nullFlavor="UNK"/>
+                          <wholeOrganization>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                            <name>Home Community</name>
+                            <telecom use="WP" value="tel:(617) 621-0600"/>
+                            <addr use="WP">
+                              <streetAddressLine>One Memorial Drive</streetAddressLine>
+                              <city>Cambridge</city>
+                              <state>MA</state>
+                              <postalCode>02142</postalCode>
+                              <country>US</country>
+                            </addr>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </representedOrganization>
+                    </assignedEntity>
+                  </informant>
+                  <entryRelationship typeCode="REFR" inversionInd="false">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.1.57"/>
+                      <templateId root="2.16.840.1.113883.10.20.1.47"/>
+                      <code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                      <statusCode code="completed"/>
+                      <value code="55561003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Active" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>Active</originalText>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                  <entryRelationship typeCode="RSON">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.19"/>
+                      <id nullFlavor="UNK"/>
+                      <code code="55607006" displayName="Problem" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                      <statusCode code="completed"/>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <value nullFlavor="OTH" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                        <originalText>
+                          <reference value="#dischargeMedicationIndicationLink-3"/>
+                        </originalText>
+                        <translation code="Sinusitis" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="Sinusitis"/>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                  <entryRelationship typeCode="REFR">
+                    <supply classCode="SPLY" moodCode="INT">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.17"/>
+                      <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI69550" assigningAuthorityName="Local Community Hospital-PlacerId"/>
+                      <statusCode code="completed"/>
+                      <repeatNumber value="1"/>
+                      <product typeCode="PRD">
+                        <manufacturedProduct classCode="MANU">
+                          <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+                          <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                            <code code="329646" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Cefepime 20 MG/ML">
+                              <originalText>
+                                <reference value="#dischargeMedicationOrderedNameLink-3"/>
+                              </originalText>
+                              <translation code="329646" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Cefepime 20 MG/ML"/>
+                            </code>
+                            <name>Cefepime 20 MG/ML</name>
+                          </manufacturedMaterial>
+                        </manufacturedProduct>
+                      </product>
+                      <author typeCode="AUT">
+                        <time value="20121002114500"/>
+                        <assignedAuthor classCode="ASSIGNED">
+                          <id root="2.16.840.1.113883.3.86.3.1" extension="MARGREEN"/>
+                          <addr use="WP">
+                            <streetAddressLine>1002 Healthcare Dr.</streetAddressLine>
+                            <city>PORTLAND</city>
+                            <state>OR</state>
+                            <postalCode>97005</postalCode>
+                            <country>US</country>
+                          </addr>
+                          <telecom use="WP" value="tel:555-555-1122"/>
+                          <telecom value="mailto:mrgreen@othermail.com"/>
+                          <assignedPerson>
+                            <name use="L">
+                              <family>Green</family>
+                              <given>Martin</given>
+                              <prefix>Dr</prefix>
+                              <suffix>MD</suffix>
+                            </name>
+                          </assignedPerson>
+                          <representedOrganization>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                            <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                            <name>Local Community Hospital</name>
+                            <telecom nullFlavor="UNK"/>
+                            <addr nullFlavor="UNK"/>
+                            <asOrganizationPartOf>
+                              <effectiveTime nullFlavor="UNK"/>
+                              <wholeOrganization>
+                                <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                                <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                                <name>Home Community</name>
+                                <telecom use="WP" value="tel:(617) 621-0600"/>
+                                <addr use="WP">
+                                  <streetAddressLine>One Memorial Drive</streetAddressLine>
+                                  <city>Cambridge</city>
+                                  <state>MA</state>
+                                  <postalCode>02142</postalCode>
+                                  <country>US</country>
+                                </addr>
+                              </wholeOrganization>
+                            </asOrganizationPartOf>
+                          </representedOrganization>
+                        </assignedAuthor>
+                      </author>
+                    </supply>
+                  </entryRelationship>
+                  <entryRelationship typeCode="REFR">
+                    <supply classCode="SPLY" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.18"/>
+                      <id nullFlavor="UNK" extension="Local Community Hospital-UnspecifiedPrescriptionNumber"/>
+                      <statusCode code="completed"/>
+                      <repeatNumber value="1"/>
+                      <quantity value="20" unit="MG"/>
+                      <product typeCode="PRD">
+                        <manufacturedProduct classCode="MANU">
+                          <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+                          <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                            <code code="329646" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Cefepime 20 MG/ML">
+                              <originalText>
+                                <reference value="#dischargeMedicationFilledNameLink-3"/>
+                              </originalText>
+                              <translation code="329646" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RXNORM" displayName="Cefepime 20 MG/ML"/>
+                            </code>
+                            <name>Cefepime</name>
+                          </manufacturedMaterial>
+                        </manufacturedProduct>
+                      </product>
+                    </supply>
+                  </entryRelationship>
+                  <entryRelationship typeCode="SUBJ" inversionInd="true">
+                    <encounter classCode="ENC" moodCode="EVN">
+                      <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="170314E1INP"/>
+                    </encounter>
+                  </entryRelationship>
+                </substanceAdministration>
+              </entryRelationship>
+            </act>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.2"/>
+          <code code="11369-6" displayName="History of Immunizations" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+          <title>Immunizations</title>
+          <text>
+            <table border="1" width="100%">
+              <thead>
+                <tr>
+                  <th>Ordered Immunization Name</th>
+                  <th>Filled Immunization Name</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="immunizationNarrativeLink-1">
+                  <td ID="immunizationOrderedNameLink-1">Influenza virus vaccine</td>
+                  <td ID="immunizationFilledNameLink-1"/>
+                  <td>2010-09-20 00:00:00</td>
+                  <td>Completed</td>
+                  <td ID="immunizationCommentsLink-1"/>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry typeCode="DRIV">
+            <substanceAdministration classCode="SBADM" negationInd="false" moodCode="INT">
+              <templateId root="2.16.840.1.113883.10.20.22.4.52"/>
+              <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.40" extension="VDTI67584" assigningAuthorityName="Get Well Clinic-ExternalId"/>
+              <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.40" extension="D0855BFC-C3B8-11E2-B73C-109FDF65DEAC" assigningAuthorityName="Get Well Clinic-PlacerId"/>
+              <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.40" extension="D0855CCE-C3B8-11E2-B73C-109FDF65DEAC" assigningAuthorityName="Get Well Clinic-FillerId"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+              <text>
+                <reference value="#immunizationNarrativeLink-1"/>
+              </text>
+              <statusCode code="completed"/>
+              <effectiveTime value="20100920000000"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct classCode="MANU">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.54"/>
+                  <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                    <code code="88" codeSystem="2.16.840.1.113883.12.292" codeSystemName="CVX" displayName="Influenza virus vaccine">
+                      <originalText>
+                        <reference value="#immunizationOrderedNameLink-1"/>
+                      </originalText>
+                    </code>
+                    <name>Influenza virus vaccine</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author typeCode="AUT">
+                <time value="2010092000000"/>
+                <assignedAuthor classCode="ASSIGNED">
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="Dr. Bom Bay"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name use="L">
+                      <family>Bom Bay</family>
+                      <given>Dr.</given>
+                    </name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.40"/>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Get Well Clinic" displayable="true"/>
+                    <name>Get Well Clinic Desc</name>
+                    <telecom use="WP" value="tel:555-555-1002"/>
+                    <telecom value="mailto:gwc@othermail.com"/>
+                    <addr use="WP">
+                      <streetAddressLine>1002 Healthcare Dr.</streetAddressLine>
+                      <city>PORTLAND</city>
+                      <state>OR</state>
+                      <postalCode>97005</postalCode>
+                      <country>US</country>
+                    </addr>
+                    <asOrganizationPartOf>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <wholeOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                        <name>Home Community</name>
+                        <telecom use="WP" value="tel:(617) 621-0600"/>
+                        <addr use="WP">
+                          <streetAddressLine>One Memorial Drive</streetAddressLine>
+                          <city>Cambridge</city>
+                          <state>MA</state>
+                          <postalCode>02142</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+              <informant>
+                <assignedEntity>
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="Get Well Clinic"/>
+                  <addr use="WP">
+                    <streetAddressLine>1002 Healthcare Dr.</streetAddressLine>
+                    <city>PORTLAND</city>
+                    <state>OR</state>
+                    <postalCode>97005</postalCode>
+                    <country>US</country>
+                  </addr>
+                  <telecom use="WP" value="tel:555-555-1002"/>
+                  <telecom value="mailto:gwc@othermail.com"/>
+                  <assignedPerson>
+                    <name nullFlavor="UNK"/>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.40"/>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Get Well Clinic" displayable="true"/>
+                    <name>Get Well Clinic Desc</name>
+                    <telecom use="WP" value="tel:555-555-1002"/>
+                    <telecom value="mailto:gwc@othermail.com"/>
+                    <addr use="WP">
+                      <streetAddressLine>1002 Healthcare Dr.</streetAddressLine>
+                      <city>PORTLAND</city>
+                      <state>OR</state>
+                      <postalCode>97005</postalCode>
+                      <country>US</country>
+                    </addr>
+                    <asOrganizationPartOf>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <wholeOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                        <name>Home Community</name>
+                        <telecom use="WP" value="tel:(617) 621-0600"/>
+                        <addr use="WP">
+                          <streetAddressLine>One Memorial Drive</streetAddressLine>
+                          <city>Cambridge</city>
+                          <state>MA</state>
+                          <postalCode>02142</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </representedOrganization>
+                </assignedEntity>
+              </informant>
+              <entryRelationship typeCode="REFR" inversionInd="false">
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.1.57"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.47"/>
+                  <code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                  <statusCode code="completed"/>
+                  <value code="55561003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Active" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CE">
+                    <originalText>Active</originalText>
+                  </value>
+                </observation>
+              </entryRelationship>
+              <entryRelationship typeCode="SUBJ">
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.1.46"/>
+                  <code code="30973-2" codeSystem="2.16.840.1.113883.6.1" displayName="Dose number"/>
+                  <statusCode code="completed"/>
+                  <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" nullFlavor="UNK" xsi:type="INT"/>
+                </observation>
+              </entryRelationship>
+            </substanceAdministration>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.4.1"/>
+          <code code="8716-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Vital Signs"/>
+          <title>Vital Signs</title>
+          <text>
+            <table border="1" width="100%">
+              <thead>
+                <tr>
+                  <th>Vital Name</th>
+                  <th>Observation Time</th>
+                  <th>Observation Value</th>
+                  <th>Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="vitalSignNarrativeLink-1-1">
+                  <td ID="vitalSignIdentifierLink-1-1">Height</td>
+                  <td>2012-10-02 11:10:00</td>
+                  <td ID="vitalSignValueLink-1-1">64 in</td>
+                  <td/>
+                </tr>
+                <tr ID="vitalSignNarrativeLink-1-2">
+                  <td ID="vitalSignIdentifierLink-1-2">Weight</td>
+                  <td>2012-10-02 11:10:00</td>
+                  <td ID="vitalSignValueLink-1-2">160 lbs</td>
+                  <td/>
+                </tr>
+                <tr ID="vitalSignNarrativeLink-1-3">
+                  <td ID="vitalSignIdentifierLink-1-3">BP Systolic</td>
+                  <td>2012-10-02 11:10:00</td>
+                  <td ID="vitalSignValueLink-1-3">120 mm[Hg]</td>
+                  <td/>
+                </tr>
+                <tr ID="vitalSignNarrativeLink-1-4">
+                  <td ID="vitalSignIdentifierLink-1-4">BP Diastolic</td>
+                  <td>2012-10-02 11:10:00</td>
+                  <td ID="vitalSignValueLink-1-4">78 mm[Hg]</td>
+                  <td/>
+                </tr>
+                <tr ID="vitalSignNarrativeLink-1-5">
+                  <td ID="vitalSignIdentifierLink-1-5">Body Mass Index</td>
+                  <td>2012-10-02 11:10:00</td>
+                  <td ID="vitalSignValueLink-1-5">27.5 kg/m2</td>
+                  <td/>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry>
+            <organizer classCode="CLUSTER" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.26"/>
+              <id nullFlavor="UNK"/>
+              <code code="46680005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Vital signs"/>
+              <statusCode code="completed"/>
+              <effectiveTime value="20121002111000"/>
+              <author typeCode="AUT">
+                <time value="20121002111000"/>
+                <assignedAuthor classCode="ASSIGNED">
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="JQP"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name use="L">
+                      <family>Q Public</family>
+                      <given>John</given>
+                    </name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                    <name>Local Community Hospital</name>
+                    <telecom nullFlavor="UNK"/>
+                    <addr nullFlavor="UNK"/>
+                    <asOrganizationPartOf>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <wholeOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                        <name>Home Community</name>
+                        <telecom use="WP" value="tel:(617) 621-0600"/>
+                        <addr use="WP">
+                          <streetAddressLine>One Memorial Drive</streetAddressLine>
+                          <city>Cambridge</city>
+                          <state>MA</state>
+                          <postalCode>02142</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+              <informant>
+                <assignedEntity>
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="Local Community Hospital"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name nullFlavor="UNK"/>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                    <name>Local Community Hospital</name>
+                    <telecom nullFlavor="UNK"/>
+                    <addr nullFlavor="UNK"/>
+                    <asOrganizationPartOf>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <wholeOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                        <name>Home Community</name>
+                        <telecom use="WP" value="tel:(617) 621-0600"/>
+                        <addr use="WP">
+                          <streetAddressLine>One Memorial Drive</streetAddressLine>
+                          <city>Cambridge</city>
+                          <state>MA</state>
+                          <postalCode>02142</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </representedOrganization>
+                </assignedEntity>
+              </informant>
+              <component>
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI49059" assigningAuthorityName="Local Community Hospital-ExternalId"/>
+                  <code code="8302-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Height">
+                    <originalText>Height</originalText>
+                    <translation code="8302-2" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="Height"/>
+                  </code>
+                  <text>
+                    <reference value="#vitalSignNarrativeLink-1-1"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime value="20121002111000"/>
+                  <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" value="64" unit="in"/>
+                  <entryRelationship typeCode="REFR">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.1.57"/>
+                      <code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                      <statusCode code="completed"/>
+                      <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CE" code="final" codeSystem="2.16.840.1.113883.5.14" displayName="final"/>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </component>
+              <component>
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI83948" assigningAuthorityName="Local Community Hospital-ExternalId"/>
+                  <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Weight">
+                    <originalText>Weight</originalText>
+                    <translation code="3141-9" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="Weight"/>
+                  </code>
+                  <text>
+                    <reference value="#vitalSignNarrativeLink-1-2"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime value="20121002111000"/>
+                  <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" value="160" unit="lbs"/>
+                  <entryRelationship typeCode="REFR">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.1.57"/>
+                      <code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                      <statusCode code="completed"/>
+                      <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CE" code="final" codeSystem="2.16.840.1.113883.5.14" displayName="final"/>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </component>
+              <component>
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI83996" assigningAuthorityName="Local Community Hospital-ExternalId"/>
+                  <code code="8480-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="BP Systolic">
+                    <originalText>BP Systolic</originalText>
+                    <translation code="8480-6" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="BP Systolic"/>
+                  </code>
+                  <text>
+                    <reference value="#vitalSignNarrativeLink-1-3"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime value="20121002111000"/>
+                  <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" value="120" unit="mm[Hg]"/>
+                  <entryRelationship typeCode="REFR">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.1.57"/>
+                      <code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                      <statusCode code="completed"/>
+                      <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CE" code="final" codeSystem="2.16.840.1.113883.5.14" displayName="final"/>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </component>
+              <component>
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI39274" assigningAuthorityName="Local Community Hospital-ExternalId"/>
+                  <code code="8462-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="BP Diastolic">
+                    <originalText>BP Diastolic</originalText>
+                    <translation code="8462-4" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="BP Diastolic"/>
+                  </code>
+                  <text>
+                    <reference value="#vitalSignNarrativeLink-1-4"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime value="20121002111000"/>
+                  <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" value="78" unit="mm[Hg]"/>
+                  <entryRelationship typeCode="REFR">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.1.57"/>
+                      <code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                      <statusCode code="completed"/>
+                      <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CE" code="final" codeSystem="2.16.840.1.113883.5.14" displayName="final"/>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </component>
+              <component>
+                <observation classCode="OBS" moodCode="EVN">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI81177" assigningAuthorityName="Local Community Hospital-ExternalId"/>
+                  <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body Mass Index">
+                    <originalText>Body Mass Index</originalText>
+                    <translation code="39156-5" codeSystem="2.16.840.1.113883.3.86.3.1" codeSystemName="ISC-NoCodeSystem" displayName="Body Mass Index"/>
+                  </code>
+                  <text>
+                    <reference value="#vitalSignNarrativeLink-1-5"/>
+                  </text>
+                  <statusCode code="completed"/>
+                  <effectiveTime value="20121002111000"/>
+                  <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" value="27.5" unit="kg/m2"/>
+                  <entryRelationship typeCode="REFR">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <templateId root="2.16.840.1.113883.10.20.1.57"/>
+                      <code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                      <statusCode code="completed"/>
+                      <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CE" code="final" codeSystem="2.16.840.1.113883.5.14" displayName="final"/>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </component>
+              <component>
+                <encounter classCode="ENC" moodCode="EVN">
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="170314E1INP"/>
+                </encounter>
+              </component>
+            </organizer>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.5"/>
+          <code code="8648-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HOSPITAL COURSE"/>
+          <title>Hospital Course</title>
+          <text>This patient has no known hospital course.</text>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.7"/>
+          <code code="47519-4" displayName="History of Procedures" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+          <title>Procedures</title>
+          <text>
+            <table border="1" width="100%">
+              <thead>
+                <tr>
+                  <th>Procedure</th>
+                  <th>Date / Time Performed</th>
+                  <th>Performing Clinician</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="procedureNarrativeLink-1">
+                  <td ID="procedureDescriptionLink-1">Sinus CT</td>
+                  <td>2012-10-02 13:45:00</td>
+                  <td/>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry typeCode="DRIV">
+            <procedure classCode="PROC" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.14"/>
+              <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="VDTI85158" assigningAuthorityName="Local Community Hospital-ExternalId"/>
+              <code code="241526005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Sinus CT">
+                <originalText>
+                  <reference value="#procedureDescriptionLink-1"/>
+                </originalText>
+              </code>
+              <statusCode code="completed"/>
+              <effectiveTime value="20121002134500"/>
+              <author typeCode="AUT">
+                <time value="20121002230000"/>
+                <assignedAuthor classCode="ASSIGNED">
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="ADAM"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name use="L">
+                      <family>Clayton</family>
+                      <given>Adam</given>
+                    </name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                    <name>Local Community Hospital</name>
+                    <telecom use="WP" value="tel:555-555-1002"/>
+                    <telecom value="mailto:gwc@othermail.com"/>
+                    <addr use="WP">
+                      <streetAddressLine>1002 Healthcare Dr.</streetAddressLine>
+                      <city>PORTLAND</city>
+                      <state>OR</state>
+                      <postalCode>97005</postalCode>
+                      <country>US</country>
+                    </addr>
+                    <asOrganizationPartOf>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <wholeOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                        <name>Home Community</name>
+                        <telecom use="WP" value="tel:(617) 621-0600"/>
+                        <addr use="WP">
+                          <streetAddressLine>One Memorial Drive</streetAddressLine>
+                          <city>Cambridge</city>
+                          <state>MA</state>
+                          <postalCode>02142</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+              <informant>
+                <assignedEntity>
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="Local Community Hospital"/>
+                  <addr use="WP">
+                    <streetAddressLine>1002 Healthcare Dr.</streetAddressLine>
+                    <city>PORTLAND</city>
+                    <state>OR</state>
+                    <postalCode>97005</postalCode>
+                    <country>US</country>
+                  </addr>
+                  <telecom use="WP" value="tel:555-555-1002"/>
+                  <telecom value="mailto:gwc@othermail.com"/>
+                  <assignedPerson>
+                    <name nullFlavor="UNK"/>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41"/>
+                    <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="Local Community Hospital" displayable="true"/>
+                    <name>Local Community Hospital</name>
+                    <telecom use="WP" value="tel:555-555-1002"/>
+                    <telecom value="mailto:gwc@othermail.com"/>
+                    <addr use="WP">
+                      <streetAddressLine>1002 Healthcare Dr.</streetAddressLine>
+                      <city>PORTLAND</city>
+                      <state>OR</state>
+                      <postalCode>97005</postalCode>
+                      <country>US</country>
+                    </addr>
+                    <asOrganizationPartOf>
+                      <effectiveTime nullFlavor="UNK"/>
+                      <wholeOrganization>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300"/>
+                        <id root="1.3.6.1.4.1.21367.2010.1.2.300" extension="HomeCommunity" displayable="true"/>
+                        <name>Home Community</name>
+                        <telecom use="WP" value="tel:(617) 621-0600"/>
+                        <addr use="WP">
+                          <streetAddressLine>One Memorial Drive</streetAddressLine>
+                          <city>Cambridge</city>
+                          <state>MA</state>
+                          <postalCode>02142</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </representedOrganization>
+                </assignedEntity>
+              </informant>
+              <entryRelationship typeCode="SUBJ" inversionInd="true">
+                <encounter classCode="ENC" moodCode="EVN">
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="170314E1INP"/>
+                </encounter>
+              </entryRelationship>
+            </procedure>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.14"/>
+          <code code="47420-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Functional Status"/>
+          <title>Functional Status</title>
+          <text>
+            <table border="1" width="100%">
+              <thead>
+                <tr>
+                  <th>Functional or Cognitive Finding</th>
+                  <th>Observation</th>
+                  <th>Observation Details</th>
+                  <th>Onset Date</th>
+                  <th>Resolution Date</th>
+                  <th>Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="cognitiveStatusNarrativeLink-1">
+                  <td>Cognitive function finding</td>
+                  <td>Memory Impairment</td>
+                  <td ID="cognitiveStatusDescriptionLink-1"/>
+                  <td>2012-10-05 12:00:00</td>
+                  <td/>
+                  <td ID="cognitiveStatusCommentsLink-1"/>
+                </tr>
+                <tr ID="functionalStatusNarrativeLink-2">
+                  <td>Finding of functional performance and activity</td>
+                  <td>Dependence on walking stick</td>
+                  <td ID="functionalStatusDescriptionLink-2"/>
+                  <td>2012-09-20 00:00:00</td>
+                  <td/>
+                  <td ID="functionalStatusCommentsLink-2"/>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry typeCode="DRIV">
+            <observation classCode="OBS" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+              <templateId root="2.16.840.1.113883.10.20.22.4.73"/>
+              <id nullFlavor="NI"/>
+              <code code="373930000" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Cognitive function finding">
+                <originalText>Cognitive function finding</originalText>
+              </code>
+              <text>
+                <reference value="#cognitiveStatusDescriptionLink-1"/>
+              </text>
+              <statusCode code="completed"/>
+              <effectiveTime>
+                <low value="20121005120000"/>
+              </effectiveTime>
+              <value code="386807006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Memory Impairment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                <originalText>Memory Impairment</originalText>
+              </value>
+              <author typeCode="AUT">
+                <time value="20121005111000"/>
+                <assignedAuthor classCode="ASSIGNED">
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="WXT"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name use="L">
+                      <family>Tambor</family>
+                      <given>Wat</given>
+                    </name>
+                  </assignedPerson>
+                </assignedAuthor>
+              </author>
+              <entryRelationship typeCode="SUBJ" inversionInd="true">
+                <encounter classCode="ENC" moodCode="EVN">
+                  <id root="1.3.6.1.4.1.21367.2010.1.2.300.2.41" extension="170314E1INP"/>
+                </encounter>
+              </entryRelationship>
+            </observation>
+          </entry>
+          <entry typeCode="DRIV">
+            <observation classCode="OBS" moodCode="EVN">
+              <templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+              <templateId root="2.16.840.1.113883.10.20.22.4.68"/>
+              <id nullFlavor="NI"/>
+              <code code="248536006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Finding of functional performance and activity">
+                <originalText>Finding of functional performance and activity</originalText>
+              </code>
+              <text>
+                <reference value="#functionalStatusDescriptionLink-2"/>
+              </text>
+              <statusCode code="completed"/>
+              <effectiveTime>
+                <low value="20120920000000"/>
+              </effectiveTime>
+              <value code="105504002" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Dependence on walking stick" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD">
+                <originalText>Dependence on walking stick</originalText>
+              </value>
+              <author typeCode="AUT">
+                <time value="20121002111000"/>
+                <assignedAuthor classCode="ASSIGNED">
+                  <id root="2.16.840.1.113883.3.86.3.1" extension="WXT"/>
+                  <addr nullFlavor="UNK"/>
+                  <telecom nullFlavor="UNK"/>
+                  <assignedPerson>
+                    <name use="L">
+                      <family>Tambor</family>
+                      <given>Wat</given>
+                    </name>
+                  </assignedPerson>
+                </assignedAuthor>
+              </author>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.10"/>
+          <code code="18776-5" displayName="Treatment Plan" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+          <title>Plan of Care</title>
+          <text>
+            <table border="1" width="100%">
+              <thead>
+                <tr>
+                  <th>Planned Activity</th>
+                  <th>Planned Date</th>
+                  <th>Details</th>
+                  <th>Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="planOfCareNarrativeLink-Goal-1">
+                  <td>Goal</td>
+                  <td>2012-11-25 00:00:00</td>
+                  <td ID="planOfCareDescriptionLink-Goal-1">Weight Loss [code = 289169006]</td>
+                  <td/>
+                </tr>
+                <tr ID="planOfCareNarrativeLink-Instructions-1">
+                  <td>Instructions</td>
+                  <td/>
+                  <td ID="planOfCareDescriptionLink-Instructions-1">
+                    Doctor recommends at least 30 minutes of exercise per day.<br/>Use sports heart rate monitor to aid in monitoring effort level.<br/>Read "Eat This Not That".
+                  </td>
+                  <td/>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="INT">
+              <templateId root="2.16.840.1.113883.10.20.22.4.39"/>
+              <id nullFlavor="UNK"/>
+              <code code="289169006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Weight Loss" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CE"/>
+              <text>
+                <reference value="#planOfCareDescriptionLink-Goal-1"/>
+              </text>
+              <statusCode code="completed"/>
+              <effectiveTime>
+                <low value="20121002000000"/>
+                <high value="20121125000000"/>
+              </effectiveTime>
+            </act>
+          </entry>
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="INT">
+              <templateId root="2.16.840.1.113883.10.20.22.4.20"/>
+              <id nullFlavor="UNK"/>
+              <code nullFlavor="UNK" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CE"/>
+              <text>
+                <reference value="#planOfCareDescriptionLink-Instructions-1"/>
+              </text>
+              <statusCode code="completed"/>
+            </act>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="2.16.840.1.113883.10.20.22.2.41"/>
+          <code code="8653-8" displayName="HOSPITAL DISCHARGE INSTRUCTIONS" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+          <title>Hospital Discharge Instructions</title>
+          <text>
+            <list>
+              <item>
+                You were admitted to Local Community Hospital on 10/2/2012 with a diagnosis of left maxillary sinus mass. You underwent a biopsy of the sinus mass and were treated with IV antibiotics. You tolerated the procedure without complications and your condition improved. You were discharged from Local Community Hospital on 10/5/2012 with instructions to follow up with Dr. Rodriguez. Should you have any questions prior to discharge, please contact a member of your healthcare team. If you have left the hospital and have any questions, please contact your primary care physician.
+
+                Instructions:
+                1. Take all medications as prescribed
+                2. No heavy lifting, straining, or nose blowing
+                3. If you experience any of the following symptoms, call your primary care physician or return to the Emergency Room:
+                - Chest pain
+                - Shortness of breath
+                - Dizziness or light-headedness
+                - Intractable nausea or vomiting
+                - High fever
+                - Uncontrollable bleeding
+                - Pain or redness at the site of any previous intravenous catheter
+                - Any other unusual symptoms
+
+                Schedule a follow up appointment with your primary care physician in one week
+              </item>
+            </list>
+          </text>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>
