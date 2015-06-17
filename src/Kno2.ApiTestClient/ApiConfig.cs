@@ -11,6 +11,7 @@ namespace Kno2.ApiTestClient
     {
         public string ClientId;
         public string ClientSecret;
+        public string AppId;
         public Uri BaseUri;
         public Uri AuthUri;
 
@@ -30,6 +31,7 @@ namespace Kno2.ApiTestClient
         {
             ClientId = ConfigurationManager.AppSettings["ClientId"];
             ClientSecret = ConfigurationManager.AppSettings["ClientSecret"];
+            AppId = ConfigurationManager.AppSettings["AppId"];
             BaseUri = new Uri(ConfigurationManager.AppSettings["BaseUri"]);
             AuthUri = new Uri(ConfigurationManager.AppSettings["AuthUri"], UriKind.Relative);
 

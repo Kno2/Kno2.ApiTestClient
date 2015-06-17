@@ -1,8 +1,8 @@
 # Helper script for those who want to run psake without importing the module.
 # Example:
-# .\psake.ps1 "default.ps1" "BuildHelloWord" "4.0" 
+# .\psake.ps1 "default.ps1" "BuildHelloWord" "4.0"
 
-# Must match parameter definitions for psake.psm1/invoke-psake 
+# Must match parameter definitions for psake.psm1/invoke-psake
 # otherwise named parameter binding fails
 param(
   [Parameter(Position=0,Mandatory=0)]
@@ -18,7 +18,7 @@ param(
   [Parameter(Position=5, Mandatory=0)]
   [System.Collections.Hashtable]$properties = @{},
 
-## adding helper script parameters 
+## adding helper script parameters
   [Parameter(Position=6, Mandatory=0)]
   [string]$baseUri = "",
   [Parameter(Position=7, Mandatory=0)]
@@ -26,6 +26,8 @@ param(
   [Parameter(Position=8, Mandatory=0)]
   [string]$ClientSecret = "",
   [Parameter(Position=9, Mandatory=0)]
+  [string]$AppId = "",
+  [Parameter(Position=10, Mandatory=0)]
   [string]$DirectMessageDomain = ""
 ##  -- -- -- -- -- -- -- -- -- -- -- --
 )
@@ -35,40 +37,40 @@ function Get-WebFile {
 <#
         .SYNOPSIS
         Downloads a file or page from the web.
-       
+
         .DESCRIPTION
         Downloads a file or page from the web (aka wget for PowerShell).
-       
-        .PARAMETER URL 
+
+        .PARAMETER URL
         The URL to download.
-       
+
         .PARAMETER FileName
         Download file path.
         If ommitted, the name is autmaitcally determined and
         downloaded to the current directory.
-       
+
         .PARAMETER Passthru
         Output text files to the pipeline.
-       
+
         NOTE: Content type must be text/html, text/xml,
-       
+
          Content
-       
+
         .PARAMETER Quiet
         Turn off the progress reports.
-       
+
         .EXAMPLE
         Get-WebFile http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml
-       
+
         Download service-names-port-numbers.xml to the current directory.
-       
+
         .EXAMPLE
         Get-WebFile http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml C:\Temp\Ports.xml
-       
+
         Download service-names-port-numbers.xml and save as C:\Temp\Ports.xml
-       
-        .NOTES  
-        Get-WebFile by Gwen Dallas (aka wget for PowerShell)   
+
+        .NOTES
+        Get-WebFile by Gwen Dallas (aka wget for PowerShell)
         History:
         v3.7.3 - Checks to see if URL is formatted properly (contains http or https)
         v3.7.2 - Puts a try-catch block around $writer = new-object System.IO.FileStream and returns/breaks to
@@ -89,41 +91,41 @@ function Get-WebFile {
         v3   -   Rewritten completely using HttpWebRequest + HttpWebResponse to figure out the file name, if possible
         v2   -   Adds a ton of parsing to make the output pretty
              added measuring the scripts involved in the command, (uses Tokenizer)
-       
-        .LINK  
-        http://poshcode.org/3219       
-#>     
-        [cmdletbinding()]    
+
+        .LINK
+        http://poshcode.org/3219
+#>
+        [cmdletbinding()]
         param(
         [parameter(Position=0,
                 Mandatory=$true,
                 HelpMessage="URL to download.")]
-                [string]$URL = (Read-Host "The URL to download"),              
-               
+                [string]$URL = (Read-Host "The URL to download"),
+
                 [parameter(Position=1,
                 Mandatory=$false,
                 HelpMessage="Download file path.")]
-        [Object]$FileName = $null,             
-               
+        [Object]$FileName = $null,
+
                 [parameter(HelpMessage="Output text files.")]
                 [switch]$Passthru,
-               
+
                 [parameter(HelpMessage="Turn off the progress reports.")]
         [switch]$Quiet
         )
-       
+
         if ($url.Contains("http")) {
                 $request = [System.Net.HttpWebRequest]::Create($url)
         }
-        else {  
+        else {
                 $URL_Format_Error = [string]"Connection protocol not specified. Recommended action: Try again using protocol (for example 'http://" + $url + "') instead. Function aborting..."
                 Write-Error $URL_Format_Error
                 return
         }
-       
+
         #http://stackoverflow.com/questions/518181/too-many-automatic-redirections-were-attempted-error-message-when-using-a-httpw
         $request.CookieContainer = New-Object System.Net.CookieContainer
- 
+
         try {
                 $responce = $request.GetResponse()
                 Write-Verbose "Responce Status: $($responce.StatusCode) ContentType: $($responce.ContentType) CharacterSet: $($responce.CharacterSet)"
@@ -132,7 +134,7 @@ function Get-WebFile {
                 Write-Error $error[0].Exception.InnerException.Message
                 return
         }
- 
+
         if ( $FileName -and -not (Split-Path $FileName) ) {
                 $FileName = Join-Path (Get-Location -PSProvider "FileSystem") $FileName
         }
@@ -152,13 +154,13 @@ function Get-WebFile {
         }
         $FileName = Join-Path (Get-Location -PSProvider "FileSystem") $FileName
         }
-        if ( $Passthru ) {     
-                try {  
+        if ( $Passthru ) {
+                try {
                         #Can't encode if character set is $null (e.g. where ContentType is application/xml)
                         if ( $responce.CharacterSet ) {
                                 $encoding = [System.Text.Encoding]::GetEncoding( $responce.CharacterSet )
                         [string]$output = ""
-                        } else {                                                               
+                        } else {
                                 Write-Warning "Can't output ContentType: $($responce.ContentType) to the pipeline."
                                 $Passthru = $false
                         }
@@ -168,7 +170,7 @@ function Get-WebFile {
                         return
                 }
         }
- 
+
         if ( $responce.StatusCode -eq 200 ) {
                 [long]$goal = $responce.ContentLength
         $reader = $responce.GetResponseStream()
@@ -199,7 +201,7 @@ function Get-WebFile {
                 }
                 }
         } while ($count -gt 0)
-     
+
         $reader.Close()
         if ($FileName) {
                 $writer.Flush()
@@ -209,7 +211,7 @@ function Get-WebFile {
         }
         $responce.Close()
         if ( $FileName ) { Get-Item $FileName }
-}#end 
+}#end
 
 
 
@@ -232,8 +234,13 @@ if([string]::IsNullOrEmpty($ClientId) -eq $false){
 }
 
 if([string]::IsNullOrEmpty($ClientSecret) -eq $false){
-	Write-Host - Adding ClientSecret -ForegroundColor green
-	$properties.Add("ClientSecret",$ClientSecret)
+  Write-Host - Adding ClientSecret -ForegroundColor green
+  $properties.Add("ClientSecret",$ClientSecret)
+}
+
+if([string]::IsNullOrEmpty($AppId) -eq $false){
+  Write-Host - Adding AppId -ForegroundColor green
+  $properties.Add("AppId",$AppId)
 }
 
 if([string]::IsNullOrEmpty($DirectMessageDomain) -eq $false){

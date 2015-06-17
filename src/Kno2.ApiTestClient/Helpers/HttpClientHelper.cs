@@ -21,7 +21,7 @@ namespace Kno2.ApiTestClient.Helpers
         /// <param name="grantType">Default grant type of the auth request (client_credentials)</param>
         /// <param name="emrSessionValue"></param>
         /// <returns></returns>
-        public static HttpClient CreateHttpClient(Uri baseUri, string defaultAccept, string clientId, string clientSecret, Uri authUri, 
+        public static HttpClient CreateHttpClient(Uri baseUri, string defaultAccept, string clientId, string clientSecret, string appId, Uri authUri,
             string grantType = "client_credentials", string emrSessionValue = null)
         {
             // Creating a Web Api HttpClient with an inital base address to use for all requests
@@ -29,7 +29,13 @@ namespace Kno2.ApiTestClient.Helpers
             //  using HttpClient within a using() block is not advised
             var httpClient = new HttpClient { BaseAddress = baseUri };
             (" √ http client created  » " + baseUri).ToConsole();
-            
+
+
+
+            // Add AppId header to all requests
+            if (!string.IsNullOrWhiteSpace(appId))
+                httpClient.DefaultRequestHeaders.Add("AppId", appId);
+
 
 
             // Add a simple header to help track the emr client with various api debugging tools

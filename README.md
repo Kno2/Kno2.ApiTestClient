@@ -7,7 +7,7 @@ later.
 
 The build bootstraps the psake build tool, downloads nuget.exe and retrieves the
 necessary nuget packages for the solution.  After the build is complete the build
-script will merge the the assemblies (ilmerge ) into the standard artifacts
+script will merge the the assemblies (ilmerge) into the standard artifacts
 folder as a single executable.
 
 After you have cloned the repository open a powershell prompt and cd to path/to/your/repo.
@@ -20,14 +20,15 @@ You will need the following values for the build command:
 - **your\_base\_uri** such as http:\\example.kno2-stage.com
 - **your\_client\_id**
 - **your\_client\_secret**
+- **your\_app\_id**
 
 Using these values execute the following
 
-    .\build\run.ps1 -baseUri your_base_uri -ClientId your_client_id -ClientSecret your_client_secret
+    .\build\run.ps1 -baseUri your_base_uri -ClientId your_client_id -ClientSecret your_client_secret -AppId your_app_id
 
 You can also add an optional switch to set the Direct Message Domain which is used to verify direct messages.  If you don't pass this the test client will assume one such as example.direct.kno2-stage.com
 
-    .\build\run.ps1 -baseUri your_base_uri -ClientId your_client_id -ClientSecret your_client_secret -DirectMessageDomain your_direct_address_domain
+    .\build\run.ps1 -baseUri your_base_uri -ClientId your_client_id -ClientSecret your_client_secret -AppId your_app_id -DirectMessageDomain your_direct_address_domain
 
 The test client is going pass a http header to help in tracking your usage in http debugging tools.
 

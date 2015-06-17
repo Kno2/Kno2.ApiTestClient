@@ -30,6 +30,7 @@ properties {
   $BaseUri = ""
   $ClientId = ""
   $ClientSecret = ""
+  $AppId = ""
   $DirectMessageDomain  = ""
 }
 
@@ -88,9 +89,13 @@ task SetClientSettings {
 	  Set-ApplicationSetting -fileName $outputConfig -name "ClientId" -value $ClientId
 	}
 
-	if([string]::IsNullOrEmpty($ClientSecret) -eq $false){
-	  Set-ApplicationSetting -fileName $outputConfig -name "ClientSecret" -value $ClientSecret
-	}
+  if([string]::IsNullOrEmpty($ClientSecret) -eq $false){
+    Set-ApplicationSetting -fileName $outputConfig -name "ClientSecret" -value $ClientSecret
+  }
+
+  if([string]::IsNullOrEmpty($AppId) -eq $false){
+    Set-ApplicationSetting -fileName $outputConfig -name "AppId" -value $AppId
+  }
 
 	if([string]::IsNullOrEmpty($DirectMessageDomain) -eq $false){
 	  Set-ApplicationSetting -fileName $outputConfig -name "DirectMessageDomain" -value $DirectMessageDomain

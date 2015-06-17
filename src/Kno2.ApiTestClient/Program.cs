@@ -32,6 +32,7 @@ namespace Kno2.ApiTestClient
                     defaultAccept: "application/json",
                     clientId: apiConfig.ClientId,
                     clientSecret: apiConfig.ClientSecret,
+                    appId: apiConfig.AppId,
                     authUri: apiConfig.AuthUri,
                     grantType: "client_credentials",
                     emrSessionValue: apiConfig.EmrSessionValue
