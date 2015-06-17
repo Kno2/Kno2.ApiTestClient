@@ -70,14 +70,14 @@ namespace Kno2.ApiTestClient.Helpers
         public static AttachmentResource UploadAttachment(HttpClient httpClient, Uri attachmentsUri, string fileName, AttachmentResource attachment)
         {
             (" √ creating attachment metadata for file » " + attachment.NativeFileName).ToConsole();
-            ("   + confidentiality » " + attachment.AttachmentMetaResource.Confidentiality).ToConsole();
-            ("   + documentType » " + attachment.AttachmentMetaResource.DocumentType).ToConsole();
-            ("   + documentDate » " + attachment.AttachmentMetaResource.DocumentDate).ToConsole();
-            ("   + documentDescription » " + attachment.AttachmentMetaResource.DocumentDescription).ToConsole();
+            ("   + confidentiality » " + attachment.AttachmentMeta.Confidentiality).ToConsole();
+            ("   + documentType » " + attachment.AttachmentMeta.DocumentType).ToConsole();
+            ("   + documentDate » " + attachment.AttachmentMeta.DocumentDate).ToConsole();
+            ("   + documentDescription » " + attachment.AttachmentMeta.DocumentDescription).ToConsole();
             
 
 
-            string serializeObject = Serialize<AttachmentMetaResource>(attachment.AttachmentMetaResource, httpClient.DefaultMediaType());
+            string serializeObject = Serialize<AttachmentMetaResource>(attachment.AttachmentMeta, httpClient.DefaultMediaType());
             (" √ serializing request object to " + httpClient.DefaultMediaType()).ToConsole();
             
 

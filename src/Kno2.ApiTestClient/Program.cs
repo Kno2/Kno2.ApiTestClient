@@ -91,7 +91,7 @@ namespace Kno2.ApiTestClient
                             NativeFileName = fileName,
                             NativeFileBytes = FileHelpers.GetSampleAttachmentBytes(fileType),
                             DocumentType = documentTypes.First(),
-                            AttachmentMetaResource = new AttachmentMetaResource
+                            AttachmentMeta = new AttachmentMetaResource
                             {
                                 DocumentTitle = fileType.Description() + " Sample Document Title",
                                 DocumentType = documentTypes.First(),

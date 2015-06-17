@@ -84,7 +84,7 @@ namespace Kno2.ApiTestClient.Resources
         public bool IsClone { get; set; }
         public string PreviewKey { get; set; }
         public string[] Recipients { get; set; }
-        public AttachmentMetaResource AttachmentMetaResource { get; set; }
+        public AttachmentMetaResource AttachmentMeta { get; set; }
         public bool IsPreviewAvailable { get; set; }
         public int SenderOrganizationId { get; set; }
         public string PreviewAvailable { get; set; }
