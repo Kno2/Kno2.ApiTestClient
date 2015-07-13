@@ -173,7 +173,9 @@ namespace Kno2.ApiTestClient.Resources
         PDFExport,
         NativeExport,
         Printed,
-        Saved
+        Saved,
+        AwaitingEMRExport,
+        EMRExported
     }
 
     public enum Priority

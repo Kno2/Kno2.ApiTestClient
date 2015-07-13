@@ -264,8 +264,10 @@ namespace Kno2.ApiTestClient.Helpers
         /// <param name="httpClient">Existing http client object setup with auth headers</param>
         /// <param name="documentsMessagesUri"></param>
         /// <returns></returns>
-        public static string RequestUnprocessedIntakeMessages(HttpClient httpClient, Uri documentsMessagesUri)
+        public static IEnumerable<MessageResource> RequestUnprocessedIntakeMessages(HttpClient httpClient, Uri documentsMessagesUri)
         {
+            IEnumerable<MessageResource> messageResources = Enumerable.Empty<MessageResource>();
+
             // This example is going to parse the Uri to display the query paramters.
             Uri resource = new Uri(httpClient.BaseAddress, documentsMessagesUri);
 
@@ -284,13 +286,18 @@ namespace Kno2.ApiTestClient.Helpers
 
 
 
-            // This response is a collection containing the document types that can be used for uploading
-            //  an attachment
+            // parse the response.items for the messages and convert them to message resources
             JToken jToken = JObject.Parse(responseJson);
-            var intakeMessageCount = jToken.SelectToken("totalCount").ToString();
-            (" √ parsing json response - unprocessed intake messages found » " + intakeMessageCount).ToConsole();
+            if (string.IsNullOrWhiteSpace(responseJson))
+                return messageResources;
 
-            return intakeMessageCount;
+            var messages = jToken.SelectToken("items").ToString();
+            if (string.IsNullOrWhiteSpace(messages))
+                return messageResources;
+
+            messageResources = Deserialize<IEnumerable<MessageResource>>(messages, httpClient.DefaultMediaType());
+
+            return messageResources;
         }
 
         /// <summary>
@@ -397,10 +404,8 @@ namespace Kno2.ApiTestClient.Helpers
             //create an anonymous object that will be serialized as json
             var request = new
             {
-                id = messageId,
                 isProcessed = true,
-                processType = "emrclient",
-                subject = subject
+                processType = "emrexported"
             };
 
             // Using Json.Net (http://www.nuget.org/packages/Newtonsoft.Json/) we serialize the object into
@@ -446,9 +451,13 @@ namespace Kno2.ApiTestClient.Helpers
 
                 using (var ms = new MemoryStream())
                 {
-                    var xmlWriterSettings = new XmlWriterSettings { 
-                        CloseOutput = false, Encoding = enc, 
-                        OmitXmlDeclaration = false, Indent = true };
+                    var xmlWriterSettings = new XmlWriterSettings
+                    {
+                        CloseOutput = false,
+                        Encoding = enc,
+                        OmitXmlDeclaration = false,
+                        Indent = true
+                    };
                     using (XmlWriter xmlWriter = XmlWriter.Create(ms, xmlWriterSettings))
                     {
                         var s = new XmlSerializer(typeof(T));
