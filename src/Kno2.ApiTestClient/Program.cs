@@ -40,6 +40,21 @@ namespace Kno2.ApiTestClient
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 
+                // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                // Create a stock patient info
+                // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                "Creating stock patient info".AsInlineBanner(ConsoleColor.Gray);
+                var stockPatient = new Patient
+                {
+                    PatientId = "8675309",
+                    FirstName = "John",
+                    LastName = "Smith (emr-client)",
+                    Gender = "M",
+                    BirthDate = new DateTime(1980, 1, 1).ToShortDateString()
+                };
+                // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
 
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                 // Validate the associated addresses
@@ -98,7 +113,8 @@ namespace Kno2.ApiTestClient
                                 DocumentType = documentTypes.First(),
                                 DocumentDate = DateTime.UtcNow,
                                 DocumentDescription = fileType.Description() + " Sample Document Description",
-                                Confidentiality = Confidentiality.Normal
+                                Confidentiality = Confidentiality.Normal,
+                                Patient = stockPatient
                             }
                         }
                         );
@@ -134,12 +150,8 @@ namespace Kno2.ApiTestClient
                 message.Attachments = attachments;
                 message.Subject = "Referral";
                 message.ToAddress = toAddress;
-                message.FromAddress = fromAddress;
-                message.PatientResource.PatientId = "8675309";
-                message.PatientResource.FirstName = "John";
-                message.PatientResource.LastName = "Smith (emr-client)";
-                message.PatientResource.Gender = "M";
-                message.PatientResource.BirthDate = new DateTime(1980, 1, 1).ToShortDateString();
+                message.FromAddress = fromAddress;                
+                message.Patient = stockPatient;
 
                 ApiHelper.SendDraft(httpClient: httpClient,
                     messageUri: apiConfig.MessagesUri(message.Id),
@@ -153,8 +165,8 @@ namespace Kno2.ApiTestClient
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                 "Updating the message (draft)".AsInlineBanner(light);
 
-                message.PatientResource.MiddleName = " (emr-client)";
-                message.PatientResource.LastName = "Smith";
+                message.Patient.MiddleName = " (emr-client)";
+                message.Patient.LastName = "Smith";
 
                 ApiHelper.SendDraft(httpClient: httpClient,
                     messageUri: apiConfig.MessagesUri(message.Id),

@@ -16,8 +16,8 @@ namespace Kno2.ApiTestClient.Resources
     {
         public MessageResource()
         {
-            if (PatientResource == null)
-                PatientResource = new PatientResource();
+            if (Patient == null)
+                Patient = new Patient();
         }
 
         public List<AttachmentResource> Attachments { get; set; }
@@ -27,7 +27,7 @@ namespace Kno2.ApiTestClient.Resources
         public string PatientName { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
-        public PatientResource PatientResource { get; set; }
+        public Patient Patient { get; set; }
         public string Comments { get; set; }
         public string ReasonForDisclosure { get; set; }
         public string Origin { get; set; }
@@ -45,7 +45,7 @@ namespace Kno2.ApiTestClient.Resources
         public string Id { get; set; }
     }
 
-    public class PatientResource
+    public class Patient
     {
         public string PatientId { get; set; }
         public string FirstName { get; set; }
@@ -125,7 +125,7 @@ namespace Kno2.ApiTestClient.Resources
         public DateTime DocumentDate { get; set; }
         public string DocumentDescription { get; set; }
         public Confidentiality Confidentiality { get; set; }
-        public PatientResource PatientResource { get; set; }
+        public Patient Patient { get; set; }
     }
 
 
