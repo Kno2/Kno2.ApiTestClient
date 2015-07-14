@@ -443,7 +443,7 @@ namespace Kno2.ApiTestClient.Helpers
             ("  + Request Time: " + milliseconds + " milliseconds").ToConsole();
         }
 
-        private static string Serialize<T>(T value, MediaType mediaType)
+        public static string Serialize<T>(T value, MediaType mediaType)
         {
             if (mediaType == MediaType.xml)
             {
@@ -472,13 +472,18 @@ namespace Kno2.ApiTestClient.Helpers
             //  a json string
             if (mediaType == MediaType.json)
             {
-                return JsonConvert.SerializeObject(value);
+                var jsonSerializerSettings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    Formatting = Formatting.Indented
+                };
+                return JsonConvert.SerializeObject(value, jsonSerializerSettings);
             }
 
             throw new SerializationException("no serializer for " + mediaType);
         }
 
-        private static T Deserialize<T>(string rawValue, MediaType mediaType)
+        public static T Deserialize<T>(string rawValue, MediaType mediaType)
         {
             if (mediaType == MediaType.xml)
             {
