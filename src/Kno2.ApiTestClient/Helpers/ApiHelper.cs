@@ -16,7 +16,9 @@ using System.Xml.Serialization;
 using Kno2.ApiTestClient.Extensions;
 using Kno2.ApiTestClient.Resources;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Kno2.ApiTestClient.Helpers
@@ -475,7 +477,9 @@ namespace Kno2.ApiTestClient.Helpers
                 var jsonSerializerSettings = new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
+                    Converters = new[] { new StringEnumConverter() },
+                    ContractResolver = new CamelCasePropertyNamesContractResolver() 
                 };
                 return JsonConvert.SerializeObject(value, jsonSerializerSettings);
             }

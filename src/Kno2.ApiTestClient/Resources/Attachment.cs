@@ -80,7 +80,6 @@ namespace Kno2.ApiTestClient.Resources
         public string Key { get; set; }
         public string DocumentType { get; set; }
         public string MimeType { get; set; }
-        public string FileName { get; set; }
         public bool IsClone { get; set; }
         public string PreviewKey { get; set; }
         public string[] Recipients { get; set; }
