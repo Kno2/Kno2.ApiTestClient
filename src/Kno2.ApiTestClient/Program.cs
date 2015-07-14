@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using Kno2.ApiTestClient.Helpers;
 using Kno2.ApiTestClient.Resources;
@@ -84,7 +85,7 @@ namespace Kno2.ApiTestClient
                 // Request a message draft id
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                 "Requesting Draft Id".AsInlineBanner(dark);
-                var message = ApiHelper.RequestMessageDraft(httpClient: httpClient,
+                var outboundMessage = ApiHelper.RequestMessageDraft(httpClient: httpClient,
                       messageUri: apiConfig.MessagesUri()
                     );
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -100,7 +101,7 @@ namespace Kno2.ApiTestClient
                     string fileName = FileHelpers.GenerateAttachmentName(fileType);
                     ("Uploading " + fileType + " Attachment " + fileName).AsInlineBanner(light);
                     var attachment = ApiHelper.UploadAttachment(httpClient: httpClient,
-                        attachmentsUri: apiConfig.AttachmentsUri(message.Id),
+                        attachmentsUri: apiConfig.AttachmentsUri(outboundMessage.Id),
                         fileName: fileName,
                         attachment: new AttachmentResource
                         {
@@ -113,8 +114,7 @@ namespace Kno2.ApiTestClient
                                 DocumentType = documentTypes.First(),
                                 DocumentDate = DateTime.UtcNow,
                                 DocumentDescription = fileType.Description() + " Sample Document Description",
-                                Confidentiality = Confidentiality.Normal,
-                                Patient = stockPatient
+                                Confidentiality = Confidentiality.Normal
                             }
                         }
                         );
@@ -134,7 +134,7 @@ namespace Kno2.ApiTestClient
                 {
                     ("Requesting Attachment Metadata for attachment " + id).AsInlineBanner(dark);
                     var metadata = ApiHelper.RequestAttachmentMetadata(httpClient: httpClient,
-                        attachmentsUri: apiConfig.AttachmentsUri(messageId: message.Id, attachmentId: id)
+                        attachmentsUri: apiConfig.AttachmentsUri(messageId: outboundMessage.Id, attachmentId: id)
                         );
                     attachments.Add(metadata);
                 }
@@ -147,15 +147,15 @@ namespace Kno2.ApiTestClient
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                 "Sending the message (draft)".AsInlineBanner(light);
 
-                message.Attachments = attachments;
-                message.Subject = "Referral";
-                message.ToAddress = toAddress;
-                message.FromAddress = fromAddress;                
-                message.Patient = stockPatient;
+                outboundMessage.Attachments = attachments;
+                outboundMessage.Subject = "Referral";
+                outboundMessage.ToAddress = toAddress;
+                outboundMessage.FromAddress = fromAddress;
+                outboundMessage.Patient = stockPatient;
 
                 ApiHelper.SendDraft(httpClient: httpClient,
-                    messageUri: apiConfig.MessagesUri(message.Id),
-                    messageResource: message);
+                    messageUri: apiConfig.MessagesUri(outboundMessage.Id),
+                    messageResource: outboundMessage);
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 
@@ -165,12 +165,12 @@ namespace Kno2.ApiTestClient
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                 "Updating the message (draft)".AsInlineBanner(light);
 
-                message.Patient.MiddleName = " (emr-client)";
-                message.Patient.LastName = "Smith";
+                outboundMessage.Patient.MiddleName = " (emr-client)";
+                outboundMessage.Patient.LastName = "Smith";
 
                 ApiHelper.SendDraft(httpClient: httpClient,
-                    messageUri: apiConfig.MessagesUri(message.Id),
-                    messageResource: message);
+                    messageUri: apiConfig.MessagesUri(outboundMessage.Id),
+                    messageResource: outboundMessage);
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 
@@ -180,16 +180,16 @@ namespace Kno2.ApiTestClient
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                 "Sending the message (release)".AsInlineBanner(dark);
 
-                message.Comments = "Comments";
-                message.ReasonForDisclosure = "Additional disclosure reason ";
-                message.Body = "Referral from Caring Hands Village\n\n" +
+                outboundMessage.Comments = "Comments";
+                outboundMessage.ReasonForDisclosure = "Additional disclosure reason ";
+                outboundMessage.Body = "Referral from Caring Hands Village\n\n" +
                                     "Referral for: \nPatient ID: 8675309\n" +
                                     "Patient Name: John Smith\nDOB: 01/01/1980\n\n" +
                                     "Comments:\nComments";
 
                 ApiHelper.SendRelease(httpClient: httpClient,
-                    messageSendUri: apiConfig.MessageSendUri(message.Id),
-                    messageResource: message
+                    messageSendUri: apiConfig.MessageSendUri(outboundMessage.Id),
+                    messageResource: outboundMessage
                     );
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -201,11 +201,156 @@ namespace Kno2.ApiTestClient
 
                 // This will wait forever for messages that meet the search criteria
                 IEnumerable<MessageResource> intakeMessages = Enumerable.Empty<MessageResource>();
-                while (!intakeMessages.Any())
+                while (true)
                 {
                     "Requesting Available Unprocessed Intake Messages".AsInlineBanner(light);
                     intakeMessages = ApiHelper.RequestUnprocessedIntakeMessages(httpClient: httpClient,
                         documentsMessagesUri: apiConfig.MessageSearch());
+
+
+
+                    // Message Download / Recieve
+
+
+                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                    // Set the message output to be next the executable
+                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                    string messageOutputPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? string.Empty;
+                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
+                    foreach (var intakeMessage in intakeMessages)
+                    {
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        // Request the message
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        "Getting Message".AsInlineBanner(dark);
+                        string messageJson = ApiHelper.RequestMessage(httpClient: httpClient,
+                                                        messageUri: apiConfig.MessagesUri(intakeMessage.Id)
+                                                        );
+                        string localMessageDirectory = Path.Combine(messageOutputPath, "MessageDownload", intakeMessage.Id);
+                        if (!Directory.Exists(localMessageDirectory))
+                            Directory.CreateDirectory(localMessageDirectory);
+
+                        File.WriteAllText(Path.Combine(localMessageDirectory, "message.json"), messageJson);
+                        var retrievedMessage = JsonConvert.DeserializeObject<MessageResource>(messageJson);
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
+
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        // Request the attachment meta data
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        foreach (var attachment in retrievedMessage.Attachments)
+                        {
+                            ("Requesting Attachment Metadata for attachment " + attachment.Id).AsInlineBanner(dark);
+                            var metadata = ApiHelper.RequestAttachmentMetadata(httpClient: httpClient,
+                                attachmentsUri: apiConfig.AttachmentsUri(messageId: intakeMessage.Id, attachmentId: attachment.Id)
+                                );
+                            string filedata = ApiHelper.Serialize(metadata, httpClient.DefaultMediaType());
+                            string fileName = Path.Combine(messageOutputPath, localMessageDirectory, attachment.NativeFileName + ".metadata." + httpClient.DefaultMediaType());
+                            (" √ saving metadata file as " + fileName).AsClosingBanner(light);
+                            File.WriteAllText(fileName, filedata);
+                        }
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
+
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        // Request the native attachment then save it to disk.
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        foreach (var attachment in intakeMessage.Attachments.OrderBy(a => a.IsPreviewAvailable))
+                        {
+                            // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                            // Request the native attachment
+                            // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                            ("Requesting Native Attachment File Data " + attachment.NativeFileName).AsBanner(light, true, false);
+                            byte[] fileBytes = ApiHelper.RequestAttachment(httpClient: httpClient,
+                                                   attachmentsUri: apiConfig.AttachmentsUri(messageId: retrievedMessage.Id, attachmentId: attachment.Id),
+                                                   mimeType: "application/octet-stream");
+                            attachment.NativeFileBytes = fileBytes;
+                            // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                            // Save the file bytes as per the nativeFileName metadata field
+                            // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                            if (fileBytes.Length > 0 && FileHelpers.FileHashMatches(attachment))
+                            {
+                                string fileName = Path.Combine(messageOutputPath, localMessageDirectory, attachment.NativeFileName);
+                                (" √ saving file as " + fileName).AsClosingBanner(light);
+                                using (var stream = new FileStream(fileName, FileMode.Create))
+                                    stream.Write(attachment.NativeFileBytes, 0, attachment.NativeFileBytes.Length);
+                            }
+                            else
+                            {
+                                (" There was a problem retrieving attachment").AsClosingBanner(light);
+                            }
+                        }
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
+
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        // Request the pdf converted attachment then save it to disk.
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        foreach (var attachment in intakeMessage.Attachments.OrderBy(a => a.Id))
+                        {
+                            // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                            // Request the native attachment
+                            // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                            ("Requesting PDF Converted Attachment File Data " + attachment.PdfFileName).AsBanner(light, true, false);
+                            byte[] fileBytes = ApiHelper.RequestAttachment(httpClient: httpClient,
+                                                   attachmentsUri: apiConfig.AttachmentsUri(messageId: retrievedMessage.Id, attachmentId: attachment.Id),
+                                                   mimeType: "application/pdf");
+                            attachment.PdfFileBytes = fileBytes;
+                            // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                            // Save the file bytes as per the nativeFileName metadata field
+                            // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                            if (fileBytes.Length > 0)
+                            {
+                                string fileName = Path.Combine(messageOutputPath, localMessageDirectory, attachment.PdfFileName);
+                                (" √ saving file as " + fileName).AsClosingBanner(light);
+                                using (var stream = new FileStream(fileName, FileMode.Create))
+                                    stream.Write(attachment.PdfFileBytes, 0, attachment.PdfFileBytes.Length);
+                            }
+                            else
+                            {
+                                (" X looks like the attachment id " + attachment.Id + " didn't convert to pdf")
+                                    .ToConsole(ConsoleColor.Red);
+                                (" There was a problem retrieving converted attachment").AsClosingBanner(light);
+                            }
+                        }
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
+
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        // Send a message read event
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        "Sending Message Read Event".AsBanner(ConsoleColor.DarkGreen, true, false);
+                        ApiHelper.RequesetMessageReadEvent(httpClient: httpClient,
+                                    messageReadEventUri: apiConfig.MessageReadEventUri(retrievedMessage.Id),
+                                    messageId: retrievedMessage.Id,
+                                    subject: intakeMessage.Subject
+                                  );
+                        ConsoleHelper.HeaderLine(false);
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
+
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        // Send a attachmenet read event for each attachment
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                        foreach (var attachment in intakeMessage.Attachments)
+                        {
+                            ("Sending Attachment Read Event for Attachment " + attachment.NativeFileName).AsBanner(ConsoleColor.DarkGreen, true, false);
+                            ApiHelper.RequestAttachmentReadEvent(httpClient: httpClient,
+                                        attachmentReadUri: apiConfig.AttachmentReadUri(messageId: retrievedMessage.Id, attachmentId: attachment.Id)
+                                      );
+                            ConsoleHelper.HeaderLine(false);
+                        }
+                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
+                    }
 
                     if (intakeMessages.Any())
                         ConsoleHelper.HeaderLine(true);
@@ -216,137 +361,6 @@ namespace Kno2.ApiTestClient
                     }
                 }
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-
-
-
-
-                // Message Download / Recieve
-
-
-                // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                // Set the message output to be next the executable
-                // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                string messageOutputPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? string.Empty;
-                // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-
-                foreach (var intakeMessage in intakeMessages)
-                {
-
-
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                    // Request the message
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                    "Getting Message".AsInlineBanner(dark);
-                    string messageJson = ApiHelper.RequestMessage(httpClient: httpClient,
-                                                    messageUri: apiConfig.MessagesUri(intakeMessage.Id)
-                                                    );
-                    string localMessageDirectory = Path.Combine(messageOutputPath, "MessageDownload", intakeMessage.Id);
-                    if (!Directory.Exists(localMessageDirectory))
-                        Directory.CreateDirectory(localMessageDirectory);
-
-                    File.WriteAllText(Path.Combine(localMessageDirectory, "message.json"), messageJson);
-                    var retrievedMessage = JsonConvert.DeserializeObject<MessageResource>(messageJson);
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-
-
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                    // Request the native attachment then save it to disk.
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                    foreach (var attachment in intakeMessage.Attachments.OrderBy(a => a.IsPreviewAvailable))
-                    {
-                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                        // Request the native attachment
-                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                        ("Requesting Native Attachment File Data " + attachment.NativeFileName).AsBanner(light, true, false);
-                        byte[] fileBytes = ApiHelper.RequestAttachment(httpClient: httpClient,
-                                               attachmentsUri: apiConfig.AttachmentsUri(messageId: retrievedMessage.Id, attachmentId: attachment.Id),
-                                               mimeType: "application/octet-stream");
-                        attachment.NativeFileBytes = fileBytes;
-                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                        // Save the file bytes as per the nativeFileName metadata field
-                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                        if (fileBytes.Length > 0 && FileHelpers.FileHashMatches(attachment))
-                        {
-                            string fileName = Path.Combine(messageOutputPath, localMessageDirectory, attachment.NativeFileName);
-                            (" √ saving file as " + fileName).AsClosingBanner(light);
-                            using (var stream = new FileStream(fileName, FileMode.Create))
-                                stream.Write(attachment.NativeFileBytes, 0, attachment.NativeFileBytes.Length);
-                        }
-                        else
-                        {
-                            (" There was a problem retrieving attachment").AsClosingBanner(light);
-                        }
-                    }
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-
-
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                    // Request the pdf converted attachment then save it to disk.
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                    foreach (var attachment in intakeMessage.Attachments.OrderBy(a => a.Id))
-                    {
-                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                        // Request the native attachment
-                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                        ("Requesting PDF Converted Attachment File Data " + attachment.PdfFileName).AsBanner(light, true, false);
-                        byte[] fileBytes = ApiHelper.RequestAttachment(httpClient: httpClient,
-                                               attachmentsUri: apiConfig.AttachmentsUri(messageId: retrievedMessage.Id, attachmentId: attachment.Id),
-                                               mimeType: "application/pdf");
-                        attachment.PdfFileBytes = fileBytes;
-                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                        // Save the file bytes as per the nativeFileName metadata field
-                        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                        if (fileBytes.Length > 0)
-                        {
-                            string fileName = Path.Combine(messageOutputPath, localMessageDirectory, attachment.PdfFileName);
-                            (" √ saving file as " + fileName).AsClosingBanner(light);
-                            using (var stream = new FileStream(fileName, FileMode.Create))
-                                stream.Write(attachment.PdfFileBytes, 0, attachment.PdfFileBytes.Length);
-                        }
-                        else
-                        {
-                            (" X looks like the attachment id " + attachment.Id + " didn't convert to pdf")
-                                .ToConsole(ConsoleColor.Red);
-                            (" There was a problem retrieving converted attachment").AsClosingBanner(light);
-                        }
-                    }
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-
-
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                    // Send a message read event
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                    "Sending Message Read Event".AsBanner(ConsoleColor.DarkGreen, true, false);
-                    ApiHelper.RequesetMessageReadEvent(httpClient: httpClient,
-                                messageReadEventUri: apiConfig.MessageReadEventUri(retrievedMessage.Id),
-                                messageId: retrievedMessage.Id,
-                                subject: intakeMessage.Subject
-                              );
-                    ConsoleHelper.HeaderLine(false);
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-
-
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                    // Send a attachmenet read event for each attachment
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                    foreach (var attachment in intakeMessage.Attachments)
-                    {
-                        ("Sending Attachment Read Event for Attachment " + attachment.NativeFileName).AsBanner(ConsoleColor.DarkGreen, true, false);
-                        ApiHelper.RequestAttachmentReadEvent(httpClient: httpClient,
-                                    attachmentReadUri: apiConfig.AttachmentReadUri(messageId: retrievedMessage.Id, attachmentId: attachment.Id)
-                                  );
-                        ConsoleHelper.HeaderLine(false);
-                    }
-                    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-
-                }
 
             }
             catch (AggregateException ex)
