@@ -95,6 +95,8 @@ task SetClientSettings {
 
   if([string]::IsNullOrEmpty($AppId) -eq $false){
     Set-ApplicationSetting -fileName $outputConfig -name "AppId" -value $AppId
+  } else {
+    Set-ApplicationSetting -fileName $outputConfig -name "AppId" -value ""
   }
 
 	if([string]::IsNullOrEmpty($DirectMessageDomain) -eq $false){
