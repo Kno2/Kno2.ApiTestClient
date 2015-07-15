@@ -21,7 +21,7 @@ properties {
   $company_name = "Kno2"
   $solution_name = "Kno2.ApiTestClient"
   $solution_file = "$srcDir\$solution_name.sln"
-  $client_apps = @("Kno2.ApiTestClient")
+  $client_apps = @("Kno2.ApiTestClient.Send","Kno2.ApiTestClient.Download")
 
   #ILMerge
   $ilmerge_path = "ilmerge.2.14.1208\tools\ILMerge.exe"
@@ -66,44 +66,56 @@ task Clean {
 }
 
 task Ilmerge {
-	Create-Directory $artifacts_dir
+  Create-Directory $artifacts_dir
 	$ilmergePath = (Join-Path $package_dir $ilmerge_path)
-	$mergedexe = (Join-Path $artifacts_dir TestClient.exe)
-	$sourceExe = (get-childitem $srcDir\$solution_name\bin\$build_level\*.exe)[0]
-	$sourceDlls = get-childitem $srcDir\$solution_name\bin\$build_level\*.dll
+	foreach($app in $client_apps) {
+    $namesplit = $app.split(".");
+    $appName = $namesplit[$namesplit.Length-1] + ".exe";
+    $mergedexe = (Join-Path $artifacts_dir $appName)
+  	$sourceExe = (get-childitem $srcDir\$app\bin\$build_level\*.exe)[0]
+  	$sourceDlls = get-childitem $srcDir\$app\bin\$build_level\*.dll
 
-	ilmerge $ilmergePath $mergedexe $sourceExe $sourceDlls
+  	ilmerge $ilmergePath $mergedexe $sourceExe $sourceDlls
+  }
 }
 
 task SetClientSettings {
-	$sourceExe = (get-childitem $srcDir\$solution_name\bin\$build_level\*.exe)[0]
-	$config = "$sourceExe.config"
-  $outputConfig = (Join-Path $artifacts_dir TestClient.exe.config)
-	Copy-Item -Path $config -Destination $outputConfig
+  foreach($app in $client_apps) {
 
-	if([string]::IsNullOrEmpty($BaseUri) -eq $false){
-	  Set-ApplicationSetting -fileName $outputConfig -name "BaseUri" -value $BaseUri
-	}
+  	$sourceExe = (get-childitem $srcDir\$app\bin\$build_level\*.exe)[0]
+  	$config = "$sourceExe.config"
 
-	if([string]::IsNullOrEmpty($ClientId) -eq $false){
-	  Set-ApplicationSetting -fileName $outputConfig -name "ClientId" -value $ClientId
-	}
+    $namesplit = $app.split(".");
+    $appName = $namesplit[$namesplit.Length-1] + ".exe";
 
-  if([string]::IsNullOrEmpty($ClientSecret) -eq $false){
-    Set-ApplicationSetting -fileName $outputConfig -name "ClientSecret" -value $ClientSecret
+    $outputConfig = (Join-Path $artifacts_dir "$appName.config")
+  	Copy-Item -Path $config -Destination $outputConfig
+
+  	if([string]::IsNullOrEmpty($BaseUri) -eq $false){
+  	  Set-ApplicationSetting -fileName $outputConfig -name "BaseUri" -value $BaseUri
+  	}
+
+  	if([string]::IsNullOrEmpty($ClientId) -eq $false){
+  	  Set-ApplicationSetting -fileName $outputConfig -name "ClientId" -value $ClientId
+  	}
+
+    if([string]::IsNullOrEmpty($ClientSecret) -eq $false){
+      Set-ApplicationSetting -fileName $outputConfig -name "ClientSecret" -value $ClientSecret
+    }
+
+    if([string]::IsNullOrEmpty($AppId) -eq $false){
+      Set-ApplicationSetting -fileName $outputConfig -name "AppId" -value $AppId
+    } else {
+      Set-ApplicationSetting -fileName $outputConfig -name "AppId" -value ""
+    }
+
+  	if([string]::IsNullOrEmpty($DirectMessageDomain) -eq $false){
+  	  Set-ApplicationSetting -fileName $outputConfig -name "DirectMessageDomain" -value $DirectMessageDomain
+  	}
+
+    $version = getVersion
+    $gitHash = getHash
+  	Set-ApplicationSetting -fileName $outputConfig -name "EmrSessionValue" -value $env:computername-$version-$gitHash
+
   }
-
-  if([string]::IsNullOrEmpty($AppId) -eq $false){
-    Set-ApplicationSetting -fileName $outputConfig -name "AppId" -value $AppId
-  } else {
-    Set-ApplicationSetting -fileName $outputConfig -name "AppId" -value ""
-  }
-
-	if([string]::IsNullOrEmpty($DirectMessageDomain) -eq $false){
-	  Set-ApplicationSetting -fileName $outputConfig -name "DirectMessageDomain" -value $DirectMessageDomain
-	}
-
-  $version = getVersion
-  $gitHash = getHash
-	Set-ApplicationSetting -fileName $outputConfig -name "EmrSessionValue" -value $env:computername-$version-$gitHash
 }

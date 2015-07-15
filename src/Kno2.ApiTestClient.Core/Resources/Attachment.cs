@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace Kno2.ApiTestClient.Resources
+namespace Kno2.ApiTestClient.Core.Resources
 {
     /// <summary>
     /// This is a simple example of creating a serialization class to help reduce

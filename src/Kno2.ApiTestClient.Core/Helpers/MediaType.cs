@@ -1,6 +1,7 @@
+using System;
 using System.ComponentModel;
 
-namespace Kno2.ApiTestClient.Helpers
+namespace Kno2.ApiTestClient.Core.Helpers
 {
     public enum MediaType
     {

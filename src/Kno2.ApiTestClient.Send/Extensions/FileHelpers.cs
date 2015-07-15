@@ -1,10 +1,11 @@
-﻿using System;
-using System.ComponentModel;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
+using Kno2.ApiTestClient.Core;
+using Kno2.ApiTestClient.Core.Helpers;
 
-namespace Kno2.ApiTestClient.Helpers
+namespace Kno2.ApiTestClient.Send.Extensions
 {
     public static class FileHelpers
     {
@@ -37,7 +38,7 @@ namespace Kno2.ApiTestClient.Helpers
         public static byte[] GetSampleAttachmentHash(FileType fileType)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            string ns = typeof(Program).Namespace;
+            string ns = typeof(ApiConfig).Namespace;
             string name = String.Format("{0}.Samples.Document.{1}", ns, fileType);
             using (var stream = assembly.GetManifestResourceStream(name))
             {
@@ -87,17 +88,6 @@ namespace Kno2.ApiTestClient.Helpers
                     return hashAlgorithm.ComputeHash(stream);
                 }
             }
-        }
-    }
-
-    public static class EnumExtensions
-    {
-        public static string Description(this Enum value)
-        {
-            var descriptionAttributes = (DescriptionAttribute[])
-                (value.GetType().GetField(value.ToString())
-                    .GetCustomAttributes(typeof(DescriptionAttribute), false));
-            return descriptionAttributes.Length > 0 ? descriptionAttributes[0].Description : value.ToString();
         }
     }
 }

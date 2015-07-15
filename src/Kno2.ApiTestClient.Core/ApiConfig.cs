@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Configuration;
-using Kno2.ApiTestClient.Helpers;
+using Kno2.ApiTestClient.Core.Helpers;
 
-namespace Kno2.ApiTestClient
+namespace Kno2.ApiTestClient.Core
 {
     /// <summary>
     /// This class shows an unsecured method of storing API authentication component values
@@ -89,7 +89,7 @@ namespace Kno2.ApiTestClient
             if (string.IsNullOrWhiteSpace(attachmentId))
                 attachmentId = " ";
 
-            return uriTemplate.BindByPosition(BaseUri, messageId, attachmentId).TrimUri();
+            return UriExtensions.TrimUri(uriTemplate.BindByPosition(BaseUri, messageId, attachmentId));
         }
 
         public Uri MessagesUri(string messageId = null)
@@ -99,7 +99,7 @@ namespace Kno2.ApiTestClient
             if (string.IsNullOrWhiteSpace(messageId))
                 messageId = " ";
 
-            return uriTemplate.BindByPosition(BaseUri, messageId).TrimUri();
+            return UriExtensions.TrimUri(uriTemplate.BindByPosition(BaseUri, messageId));
         }
 
         public Uri MessageSendUri(string messageId)

@@ -1,11 +1,10 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Net.Http;
-using Kno2.ApiTestClient.Helpers;
-using Newtonsoft.Json;
+using Kno2.ApiTestClient.Core.Helpers;
 using Newtonsoft.Json.Linq;
 
-namespace Kno2.ApiTestClient.Extensions
+namespace Kno2.ApiTestClient.Core.Extensions
 {
     public static class HttpClientExensions
     {
@@ -21,7 +20,7 @@ namespace Kno2.ApiTestClient.Extensions
                 {
                     foreach (var header in httpResponseMessage.RequestMessage.Content.Headers)
                     {
-                        string.Format(" - {0}: {1}", header.Key, string.Join(",", header.Value)).ToConsole(errorColor);
+                        string.Format(" - {0}: {1}", header.Key, string.Join((string) ",", (IEnumerable<string>) header.Value)).ToConsole(errorColor);
                     }
                 }
                 string messageBody = await httpResponseMessage.Content.ReadAsStringAsync();

@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Kno2.ApiTestClient.Resources
+namespace Kno2.ApiTestClient.Core.Resources
 {
     public class AuthResponse
     {

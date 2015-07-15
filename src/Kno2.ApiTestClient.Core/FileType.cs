@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Kno2.ApiTestClient
+namespace Kno2.ApiTestClient.Core
 {
     /// <summary>
     /// Known file extensions in the samples source folder

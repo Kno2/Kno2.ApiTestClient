@@ -7,8 +7,8 @@
     <ProjectGuid>{46333E47-4F89-4989-B154-74E00D6E24E0}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kno2.ApiTestClient</RootNamespace>
-    <AssemblyName>Kno2.ApiTestClient</AssemblyName>
+    <RootNamespace>Kno2.ApiTestClient.Send</RootNamespace>
+    <AssemblyName>Kno2.ApiTestClient.Send</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,8 +33,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -52,20 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiConfig.cs" />
-    <Compile Include="Extensions\ConsoleExtensions.cs" />
-    <Compile Include="Extensions\HttpClientExensions.cs" />
-    <Compile Include="FileType.cs" />
-    <Compile Include="Helpers\ApiHelper.cs" />
-    <Compile Include="Helpers\ConsoleHelper.cs" />
-    <Compile Include="Helpers\FileHelpers.cs" />
-    <Compile Include="Helpers\HttpClientExtensions.cs" />
-    <Compile Include="Helpers\HttpClientHelper.cs" />
-    <Compile Include="Helpers\MediaType.cs" />
+    <Compile Include="Extensions\FileHelpers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Attachment.cs" />
-    <Compile Include="Resources\AuthResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -81,6 +71,12 @@
     <EmbeddedResource Include="Samples\Document.jpg" />
     <EmbeddedResource Include="Samples\Document.txt" />
     <EmbeddedResource Include="Samples\Document.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kno2.ApiTestClient.Core\Kno2.ApiTestClient.Core.csproj">
+      <Project>{499d006b-c23e-41cc-8ace-ab13295bff37}</Project>
+      <Name>Kno2.ApiTestClient.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

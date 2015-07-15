@@ -1,7 +1,8 @@
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace Kno2.ApiTestClient.Helpers
+namespace Kno2.ApiTestClient.Core.Helpers
 {
     public static class HttpClientExtensions
     {

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Kno2.ApiTestClient.Extensions;
-using Kno2.ApiTestClient.Resources;
+using Kno2.ApiTestClient.Core.Extensions;
+using Kno2.ApiTestClient.Core.Resources;
 using Newtonsoft.Json;
 
-namespace Kno2.ApiTestClient.Helpers
+namespace Kno2.ApiTestClient.Core.Helpers
 {
-    internal static class HttpClientHelper
+    public static class HttpClientHelper
     {
         /// <summary>
         /// Creates a configured http client that can be used for the lifetime of the application
@@ -80,7 +80,7 @@ namespace Kno2.ApiTestClient.Helpers
             //  from the server.  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.PostAsync(authUri, content).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             string responseJson = result.Content.ReadAsStringAsync().Result;
             (" √ authenticating against » " + authUri + " (" + stopwatch.ElapsedMilliseconds + " ms)").ToConsole();
 

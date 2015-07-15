@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Kno2.ApiTestClient.Extensions
+namespace Kno2.ApiTestClient.Core.Extensions
 {
     /// <summary>
     /// Helper class to write out colored messages to the console

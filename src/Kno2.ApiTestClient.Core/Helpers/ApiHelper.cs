@@ -4,26 +4,23 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.Serialization;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using Kno2.ApiTestClient.Extensions;
-using Kno2.ApiTestClient.Resources;
+using Kno2.ApiTestClient.Core.Extensions;
+using Kno2.ApiTestClient.Core.Resources;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using Formatting = Newtonsoft.Json.Formatting;
+using Formatting = System.Xml.Formatting;
 
-namespace Kno2.ApiTestClient.Helpers
+namespace Kno2.ApiTestClient.Core.Helpers
 {
-    internal class ApiHelper
+    public class ApiHelper
     {
         /// <summary>
         /// Creates a http client reqeust using a simple c# anonymous object that is serialized into
@@ -38,11 +35,11 @@ namespace Kno2.ApiTestClient.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.PutAsync(messageUri, null).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             string responseJson = result.Content.ReadAsStringAsync().Result;
             WriteTimingOutput("making draft id request against", messageUri, stopwatch.ElapsedMilliseconds);
 
-            return Deserialize<MessageResource>(responseJson, httpClient.DefaultMediaType());
+            return Deserialize<MessageResource>(responseJson, HttpClientExtensions.DefaultMediaType(httpClient));
         }
 
         /// <summary>
@@ -57,12 +54,12 @@ namespace Kno2.ApiTestClient.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.GetAsync(documentTypesUri).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             string responseJson = result.Content.ReadAsStringAsync().Result;
             WriteTimingOutput("making draft id request against", result.RequestMessage.RequestUri, stopwatch.ElapsedMilliseconds);
 
 
-            var documentTypesResource = Deserialize<DocumentTypesResource>(responseJson, httpClient.DefaultMediaType());
+            var documentTypesResource = Deserialize<DocumentTypesResource>(responseJson, HttpClientExtensions.DefaultMediaType(httpClient));
 
             (" √ parsing response - document types found » " + documentTypesResource.DocumentTypes.Count()).ToConsole();
 
@@ -79,8 +76,8 @@ namespace Kno2.ApiTestClient.Helpers
             
 
 
-            string serializeObject = Serialize<AttachmentMetaResource>(attachment.AttachmentMeta, httpClient.DefaultMediaType());
-            (" √ serializing request object to " + httpClient.DefaultMediaType()).ToConsole();
+            string serializeObject = Serialize<AttachmentMetaResource>(attachment.AttachmentMeta, HttpClientExtensions.DefaultMediaType(httpClient));
+            (" √ serializing request object to " + HttpClientExtensions.DefaultMediaType(httpClient)).ToConsole();
             
 
 
@@ -92,8 +89,8 @@ namespace Kno2.ApiTestClient.Helpers
 
             // Using the StringContent (https://msdn.microsoft.com/System.Net.Http.StringContent) class to encode
             //  and setup the required mime type for this endpoint
-            var contentString = new StringContent(serializeObject, Encoding.UTF8, httpClient.DefaultMediaType().Description());
-            string.Format(" √ creating request content (string) object using as {0}", httpClient.DefaultMediaType().Description()).ToConsole();
+            var contentString = new StringContent(serializeObject, Encoding.UTF8, HttpClientExtensions.DefaultMediaType(httpClient).Description());
+            string.Format(" √ creating request content (string) object using as {0}", HttpClientExtensions.DefaultMediaType(httpClient).Description()).ToConsole();
 
 
 
@@ -113,12 +110,12 @@ namespace Kno2.ApiTestClient.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.PostAsync(attachmentsUri, multipartContent).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             string responseJson = result.Content.ReadAsStringAsync().Result;
             WriteTimingOutput("making attachment upload request against", attachmentsUri, stopwatch.ElapsedMilliseconds);
 
 
-            var attachmentResource = Deserialize<AttachmentResource>(responseJson, httpClient.DefaultMediaType());
+            var attachmentResource = Deserialize<AttachmentResource>(responseJson, HttpClientExtensions.DefaultMediaType(httpClient));
 
 
             (" √ sent " + attachment.NativeFileBytes.Length + " bytes To API").ToConsole();
@@ -199,7 +196,7 @@ namespace Kno2.ApiTestClient.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.PostAsync(attachmentResource, multipartContent).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             string responseJson = result.Content.ReadAsStringAsync().Result;
             WriteTimingOutput("making attachment upload request against", attachmentsUri, stopwatch.ElapsedMilliseconds);
 
@@ -207,7 +204,7 @@ namespace Kno2.ApiTestClient.Helpers
 
             // Parse the metadata response to extract the attachment id
             JToken jToken = JObject.Parse(responseJson);
-            long attachmentId = Convert.ToInt64(jToken.SelectToken("attachmentId").Value<string>());
+            long attachmentId = Convert.ToInt64((string) jToken.SelectToken("attachmentId").Value<string>());
 
             return attachmentId;
         }
@@ -224,13 +221,13 @@ namespace Kno2.ApiTestClient.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.GetAsync(attachmentsUri).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             var fileBytes = result.Content.ReadAsStringAsync().Result;
             WriteTimingOutput("making attachment request against", attachmentsUri, stopwatch.ElapsedMilliseconds);
 
             (" √ received " + fileBytes.Length + " bytes from API").ToConsole();
 
-            var attachmentResource = Deserialize<AttachmentResource>(fileBytes, httpClient.DefaultMediaType());
+            var attachmentResource = Deserialize<AttachmentResource>(fileBytes, HttpClientExtensions.DefaultMediaType(httpClient));
 
             return attachmentResource;
         }
@@ -251,7 +248,7 @@ namespace Kno2.ApiTestClient.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.SendAsync(request).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             var fileBytes = result.Content.ReadAsByteArrayAsync().Result;
             WriteTimingOutput("making attachment request against", attachmentsUri, stopwatch.ElapsedMilliseconds);
 
@@ -279,7 +276,7 @@ namespace Kno2.ApiTestClient.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.GetAsync(documentsMessagesUri).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             string responseJson = result.Content.ReadAsStringAsync().Result;
             WriteTimingOutput("making unprocessed intake messages request against", resource, stopwatch.ElapsedMilliseconds);
             NameValueCollection queryString = resource.ParseQueryString();
@@ -297,7 +294,7 @@ namespace Kno2.ApiTestClient.Helpers
             if (string.IsNullOrWhiteSpace(messages))
                 return messageResources;
 
-            messageResources = Deserialize<IEnumerable<MessageResource>>(messages, httpClient.DefaultMediaType());
+            messageResources = Deserialize<IEnumerable<MessageResource>>(messages, HttpClientExtensions.DefaultMediaType(httpClient));
 
             return messageResources;
         }
@@ -310,11 +307,11 @@ namespace Kno2.ApiTestClient.Helpers
         /// <param name="messageResource"></param>
         public static void SendDraft(HttpClient httpClient, Uri messageUri, MessageResource messageResource)
         {
-            string serializeObject = Serialize(messageResource, httpClient.DefaultMediaType());
-            (" √ serializing request object to " + httpClient.DefaultMediaType()).ToConsole();
+            string serializeObject = Serialize(messageResource, HttpClientExtensions.DefaultMediaType(httpClient));
+            (" √ serializing request object to " + HttpClientExtensions.DefaultMediaType(httpClient)).ToConsole();
 
-            HttpResponseMessage result = httpClient.PutAsync(messageUri, new StringContent(serializeObject, Encoding.UTF8, httpClient.DefaultMediaType().Description())).Result;
-            result.CheckStatus();
+            HttpResponseMessage result = httpClient.PutAsync(messageUri, new StringContent(serializeObject, Encoding.UTF8, HttpClientExtensions.DefaultMediaType(httpClient).Description())).Result;
+            HttpClientExensions.CheckStatus(result);
         }
 
 
@@ -326,11 +323,11 @@ namespace Kno2.ApiTestClient.Helpers
         /// <param name="messageResource"></param>
         public static void SendRelease(HttpClient httpClient, Uri messageSendUri, MessageResource messageResource)
         {
-            string serializeObject = Serialize(messageResource, httpClient.DefaultMediaType());
-            (" √ serializing request object to " + httpClient.DefaultMediaType()).ToConsole();
+            string serializeObject = Serialize(messageResource, HttpClientExtensions.DefaultMediaType(httpClient));
+            (" √ serializing request object to " + HttpClientExtensions.DefaultMediaType(httpClient)).ToConsole();
 
-            HttpResponseMessage result = httpClient.PostAsync(messageSendUri, new StringContent(serializeObject, Encoding.UTF8, httpClient.DefaultMediaType().Description())).Result;
-            result.CheckStatus();
+            HttpResponseMessage result = httpClient.PostAsync(messageSendUri, new StringContent(serializeObject, Encoding.UTF8, HttpClientExtensions.DefaultMediaType(httpClient).Description())).Result;
+            HttpClientExensions.CheckStatus(result);
         }
 
         /// <summary>
@@ -354,14 +351,14 @@ namespace Kno2.ApiTestClient.Helpers
             uriBuilder.Query = queryParameters;
 
             HttpResponseMessage result = httpClient.GetAsync(uriBuilder.Uri).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             string responseJson = result.Content.ReadAsStringAsync().Result;
 
             JObject jObject = JObject.Parse(responseJson);
             var addressValidationResults = new Dictionary<string, bool>();
             foreach (KeyValuePair<string, JToken> validationResultItem in jObject)
             {
-                bool isValid = Convert.ToBoolean(validationResultItem.Value);
+                bool isValid = Convert.ToBoolean((object) validationResultItem.Value);
                 addressValidationResults.Add(validationResultItem.Key, isValid);
                 if (isValid)
                     string.Format(" √ {0} is valid", validationResultItem.Key).ToConsole();
@@ -385,7 +382,7 @@ namespace Kno2.ApiTestClient.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.GetAsync(messageUri).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             WriteTimingOutput("making document request MessageResource request against", messageUri, stopwatch.ElapsedMilliseconds);
             string responseJson = result.Content.ReadAsStringAsync().Result;
 
@@ -412,7 +409,7 @@ namespace Kno2.ApiTestClient.Helpers
 
             // Using Json.Net (http://www.nuget.org/packages/Newtonsoft.Json/) we serialize the object into
             //  a json string
-            string serializeObject = JsonConvert.SerializeObject(request, Formatting.Indented);
+            string serializeObject = JsonConvert.SerializeObject(request, Newtonsoft.Json.Formatting.Indented);
 
             var messageProcessedContent = new StringContent(serializeObject, Encoding.UTF8, "application/json");
             httpRequestMessage.Content = messageProcessedContent;
@@ -423,7 +420,7 @@ namespace Kno2.ApiTestClient.Helpers
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             HttpResponseMessage result = httpClient.SendAsync(httpRequestMessage).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             WriteTimingOutput("making attachment read event request against", messageReadEventUri, stopwatch.ElapsedMilliseconds);
         }
 
@@ -434,7 +431,7 @@ namespace Kno2.ApiTestClient.Helpers
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             HttpResponseMessage result = httpClient.PutAsync(attachmentReadUri, null).Result;
-            result.CheckStatus();
+            HttpClientExensions.CheckStatus(result);
             WriteTimingOutput("making attachment read event request against", attachmentReadUri, stopwatch.ElapsedMilliseconds);
         }
 
@@ -477,7 +474,7 @@ namespace Kno2.ApiTestClient.Helpers
                 var jsonSerializerSettings = new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore,
-                    Formatting = Formatting.Indented,
+                    Formatting = Newtonsoft.Json.Formatting.Indented,
                     Converters = new[] { new StringEnumConverter() },
                     ContractResolver = new CamelCasePropertyNamesContractResolver() 
                 };

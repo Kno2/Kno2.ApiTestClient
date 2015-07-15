@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kno2.ApiTestClient", "Kno2.ApiTestClient\Kno2.ApiTestClient.csproj", "{46333E47-4F89-4989-B154-74E00D6E24E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kno2.ApiTestClient.Send", "Kno2.ApiTestClient.Send\Kno2.ApiTestClient.Send.csproj", "{46333E47-4F89-4989-B154-74E00D6E24E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kno2.ApiTestClient.Core", "Kno2.ApiTestClient.Core\Kno2.ApiTestClient.Core.csproj", "{499D006B-C23E-41CC-8ACE-AB13295BFF37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kno2.ApiTestClient.Download", "Kno2.ApiTestClient.Download\Kno2.ApiTestClient.Download.csproj", "{8E475C39-95C9-47EE-AE2E-8F3B4810D259}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{46333E47-4F89-4989-B154-74E00D6E24E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46333E47-4F89-4989-B154-74E00D6E24E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46333E47-4F89-4989-B154-74E00D6E24E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{499D006B-C23E-41CC-8ACE-AB13295BFF37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{499D006B-C23E-41CC-8ACE-AB13295BFF37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{499D006B-C23E-41CC-8ACE-AB13295BFF37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{499D006B-C23E-41CC-8ACE-AB13295BFF37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E475C39-95C9-47EE-AE2E-8F3B4810D259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E475C39-95C9-47EE-AE2E-8F3B4810D259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E475C39-95C9-47EE-AE2E-8F3B4810D259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E475C39-95C9-47EE-AE2E-8F3B4810D259}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

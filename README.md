@@ -35,7 +35,10 @@ The test client is going pass a http header to help in tracking your usage in ht
 
 ## Running the client ##
 
-The build output drops the application to the standard path/to/your/repo/artifacts folder where you can simply call the console application from the command line.
+The build output drops the two applications, send.exe and download.exe to the standard path/to/your/repo/artifacts folder where you can simply call the console application from the command line.
+
+- Send.exe will create on message with multiple attachments and then quit.
+- Download.exe will run a awaitingemrdownload API query and process those messages as they become available.
 
 
 This header is formatted as follows:

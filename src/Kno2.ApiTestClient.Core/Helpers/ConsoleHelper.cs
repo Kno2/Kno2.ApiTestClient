@@ -1,6 +1,6 @@
 using System;
 
-namespace Kno2.ApiTestClient.Helpers
+namespace Kno2.ApiTestClient.Core.Helpers
 {
     public static class ConsoleHelper
     {

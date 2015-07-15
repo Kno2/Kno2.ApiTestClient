@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kno2.ApiTestClient")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Kno2.ApiTestClient.Send")]
+[assembly: AssemblyDescription("Sample Send Client")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kno2")]
-[assembly: AssemblyProduct("Kno2.ApiTestClient")]
+[assembly: AssemblyProduct("Kno2.ApiTestClient.Send")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
