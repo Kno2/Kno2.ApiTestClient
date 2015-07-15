@@ -1,10 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
-using Kno2.ApiTestClient.Resources;
 
 namespace Kno2.ApiTestClient.Helpers
 {
@@ -89,19 +87,6 @@ namespace Kno2.ApiTestClient.Helpers
                     return hashAlgorithm.ComputeHash(stream);
                 }
             }
-        }
-
-        public static bool FileHashMatches(AttachmentResource attachment)
-        {
-            // Get the hash of the binary returned from the API
-            byte[] attachmentFileHash = FileHash(attachment.NativeFileBytes);
-
-            // Get the hash of the embedded resource samples
-            string extension = Path.GetExtension(attachment.NativeFileName);
-            var fileType = (FileType)Enum.Parse(typeof(FileType), extension.Substring(1), true);
-            byte[] sampleAttachmentHash = GetSampleAttachmentHash(fileType);
-
-            return sampleAttachmentHash.SequenceEqual(attachmentFileHash);
         }
     }
 

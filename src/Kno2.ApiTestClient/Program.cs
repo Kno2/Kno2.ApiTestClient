@@ -272,7 +272,7 @@ namespace Kno2.ApiTestClient
                             // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                             // Save the file bytes as per the nativeFileName metadata field
                             // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-                            if (fileBytes.Length > 0 && FileHelpers.FileHashMatches(attachment))
+                            if (fileBytes.Length > 0)
                             {
                                 string fileName = Path.Combine(messageOutputPath, localMessageDirectory, attachment.NativeFileName);
                                 (" √ saving file as " + fileName).AsClosingBanner(light);
