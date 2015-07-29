@@ -224,27 +224,27 @@ if (-not(test-path $buildFile))
 }
 
 if([string]::IsNullOrEmpty($BaseUri) -eq $false){
-	Write-Host - Adding BaseUri -ForegroundColor green
+	Write-Host - Adding BaseUri $BaseUri -ForegroundColor green
 	$properties.Add("BaseUri",$BaseUri)
 }
 
 if([string]::IsNullOrEmpty($ClientId) -eq $false){
-	Write-Host - Adding ClientId -ForegroundColor green
+	Write-Host - Adding ClientId $ClientId -ForegroundColor green
 	$properties.Add("ClientId",$ClientId)
 }
 
 if([string]::IsNullOrEmpty($ClientSecret) -eq $false){
-  Write-Host - Adding ClientSecret -ForegroundColor green
+  Write-Host - Adding ClientSecret $ClientSecret -ForegroundColor green
   $properties.Add("ClientSecret",$ClientSecret)
 }
 
 if([string]::IsNullOrEmpty($AppId) -eq $false){
-  Write-Host - Adding AppId -ForegroundColor green
+  Write-Host - Adding AppId $AppId -ForegroundColor green
   $properties.Add("AppId",$AppId)
 }
 
 if([string]::IsNullOrEmpty($DirectMessageDomain) -eq $false){
-	Write-Host - Adding DirectMessageDomain -ForegroundColor green
+	Write-Host - Adding DirectMessageDomain $DirectMessageDomain -ForegroundColor green
 	$properties.Add("DirectMessageDomain",$DirectMessageDomain)
 }
 

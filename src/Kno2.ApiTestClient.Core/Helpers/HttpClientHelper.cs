@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using Kno2.ApiTestClient.Core.Extensions;
+using Kno2.ApiTestClient.Core.MessageHandlers;
 using Kno2.ApiTestClient.Core.Resources;
 using Newtonsoft.Json;
 
@@ -27,10 +29,13 @@ namespace Kno2.ApiTestClient.Core.Helpers
             // Creating a Web Api HttpClient with an inital base address to use for all requests
             //  HttpClient lifetime is meant to exist for as long as http requests are needed.
             //  using HttpClient within a using() block is not advised
-            var httpClient = new HttpClient { BaseAddress = baseUri };
+
+
+            var accessTokenHandler = new AccessTokenHandler(new Uri(baseUri, authUri), clientId, clientSecret, appId);
+            HttpClient httpClient = HttpClientFactory.Create(new LogHandler(), accessTokenHandler);
+            httpClient.BaseAddress = baseUri;
+            //var httpClient = new HttpClient(refreshTokenHandler) { BaseAddress = baseUri };
             (" √ http client created  » " + baseUri).ToConsole();
-
-
 
             // Add AppId header to all requests
             if (!string.IsNullOrWhiteSpace(appId))
@@ -45,6 +50,8 @@ namespace Kno2.ApiTestClient.Core.Helpers
 
             httpClient.DefaultRequestHeaders.Add("Accept", defaultAccept);
 
+            return httpClient;
+
             // Setup the authorization grant type - https://tools.ietf.org/html/rfc6749#appendix-A.10
             var authValues = new List<KeyValuePair<string, string>>();
             authValues.Add(new KeyValuePair<string, string>("grant_type", grantType));
@@ -57,11 +64,11 @@ namespace Kno2.ApiTestClient.Core.Helpers
                 // The initial authorization request is make against the token endpoint.
                 // Using a grant type of client_credentials instead of password we're afforded
                 //  decoupling of security credentials from the account username and password.
-                authValues.Add(new KeyValuePair<string, string>("client_id", clientId));
-                authValues.Add(new KeyValuePair<string, string>("client_secret", clientSecret));
-                
-                (" √ setting client id » " + clientId).ToConsole();
-                (" √ setting client secret » " + clientSecret).ToConsole();
+                //authValues.Add(new KeyValuePair<string, string>("client_id", clientId));
+                //authValues.Add(new KeyValuePair<string, string>("client_secret", clientSecret));
+
+                //(" √ setting client id » " + clientId).ToConsole();
+                //(" √ setting client secret » " + clientSecret).ToConsole();
             }
 
             if (grantType == "password")
@@ -94,11 +101,18 @@ namespace Kno2.ApiTestClient.Core.Helpers
 
 
 
-            // With the auth response captured we assign a pernament auth header configuration
-            //  against the http client so that each request will have that header present.
-            // This is a just a example as you can also append the auth header directly to http messages themselves.
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authResponse.AccessToken);
-            (" √ setting auth token to http client headers » " + authResponse.AccessToken.Substring(0, 15) + " ...").ToConsole();
+            //   // With the auth response captured we assign a pernament auth header configuration
+            //   //  against the http client so that each request will have that header present.
+            //   // This is a just a example as you can also append the auth header directly to http messages themselves.
+            //   httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authResponse.AccessToken);
+            //   (" √ setting auth token to http client headers » " + authResponse.AccessToken.Substring(0, 15) + " ...").ToConsole();
+
+
+
+            // Persit the tokens
+            authResponse.Save(httpClient.DefaultMediaType());
+
+
 
             return httpClient;
         }

@@ -497,7 +497,11 @@ namespace Kno2.ApiTestClient.Core.Helpers
 
             if (mediaType == MediaType.json)
             {
-                return JsonConvert.DeserializeObject<T>(rawValue);
+                var jsonSerializerSettings = new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Auto
+                };
+                return JsonConvert.DeserializeObject<T>(rawValue, jsonSerializerSettings);
             }
 
             throw new SerializationException("no serializer for " + mediaType);

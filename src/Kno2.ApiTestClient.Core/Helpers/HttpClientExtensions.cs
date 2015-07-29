@@ -1,4 +1,6 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
@@ -8,12 +10,18 @@ namespace Kno2.ApiTestClient.Core.Helpers
     {
         public static MediaType DefaultMediaType(this HttpClient source)
         {
-            if (source.DefaultRequestHeaders.Accept.Contains(new MediaTypeWithQualityHeaderValue("application/json")))
+            return source.DefaultRequestHeaders.DefaultMediaType();
+        }
+
+        public static MediaType DefaultMediaType(this HttpRequestHeaders source)
+        {
+            if (source.Accept.Contains(new MediaTypeWithQualityHeaderValue("application/json")))
                 return MediaType.json;
-            if (source.DefaultRequestHeaders.Accept.Contains(new MediaTypeWithQualityHeaderValue("application/xml")))
+            if (source.Accept.Contains(new MediaTypeWithQualityHeaderValue("application/xml")))
                 return MediaType.xml;
 
             return MediaType.unknown;
         }
     }
+
 }
