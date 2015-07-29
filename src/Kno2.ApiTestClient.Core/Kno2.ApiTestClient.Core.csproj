@@ -55,6 +55,7 @@
     <Compile Include="Extensions\ConsoleExtensions.cs" />
     <Compile Include="Extensions\HttpClientExensions.cs" />
     <Compile Include="FileType.cs" />
+    <Compile Include="Helpers\AccessTokenHandler.cs" />
     <Compile Include="Helpers\ApiHelper.cs" />
     <Compile Include="Helpers\ConsoleHelper.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />

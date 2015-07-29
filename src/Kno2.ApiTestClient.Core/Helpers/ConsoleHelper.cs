@@ -5,10 +5,18 @@ namespace Kno2.ApiTestClient.Core.Helpers
     public static class ConsoleHelper
     {
         public static string Header = " -------------------------------------------------------------------------------------------------------";
+        public static string SmallHeader = "-----------------------------------------------------------------------------------------------------";
 
         public static void HeaderLine(bool extraLineFeed = false)
         {
             System.Console.WriteLine(Header);
+            if (extraLineFeed)
+                System.Console.WriteLine();
+        }
+
+        public static void SmallHeaderLine(bool extraLineFeed = false)
+        {
+            System.Console.WriteLine(SmallHeader);
             if (extraLineFeed)
                 System.Console.WriteLine();
         }
@@ -18,6 +26,15 @@ namespace Kno2.ApiTestClient.Core.Helpers
             var current = System.Console.ForegroundColor;
             System.Console.ForegroundColor = color;
             System.Console.WriteLine(Header);
+            System.Console.ForegroundColor = current;
+        }
+
+        public static void SmallHeaderLine(ConsoleColor color, string offset = "   ")
+        {
+            var current = System.Console.ForegroundColor;
+            System.Console.ForegroundColor = color;
+            System.Console.Write(offset);
+            System.Console.WriteLine(SmallHeader);
             System.Console.ForegroundColor = current;
         }
 
