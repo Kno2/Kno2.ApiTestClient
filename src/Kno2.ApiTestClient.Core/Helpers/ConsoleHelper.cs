@@ -11,7 +11,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
         {
             System.Console.WriteLine(Header);
             if (extraLineFeed)
-                System.Console.WriteLine();
+                System.Console.WriteLine(Header);
         }
 
         public static void SmallHeaderLine(bool extraLineFeed = false)

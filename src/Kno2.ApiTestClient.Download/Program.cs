@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.Serialization.Formatters;
 using Kno2.ApiTestClient.Core;
 using Kno2.ApiTestClient.Core.Helpers;
 using Kno2.ApiTestClient.Core.Resources;
@@ -41,6 +42,7 @@ namespace Kno2.ApiTestClient.Download
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 
+
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                 // Request the unprocessed intake messages
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -49,7 +51,7 @@ namespace Kno2.ApiTestClient.Download
                 IEnumerable<MessageResource> intakeMessages = Enumerable.Empty<MessageResource>();
                 while (true)
                 {
-                    "Requesting Available Unprocessed Intake Messages".AsInlineBanner(light);
+                    "Requesting Available Unprocessed Intake Messages".AsOpeningBanner(light, false, true, false, false);
                     intakeMessages = ApiHelper.RequestUnprocessedIntakeMessages(httpClient: httpClient,
                         documentsMessagesUri: apiConfig.MessageSearch());
 
@@ -194,15 +196,15 @@ namespace Kno2.ApiTestClient.Download
                             ConsoleHelper.HeaderLine(false);
                         }
                         // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-
                     }
 
                     if (intakeMessages.Any())
                         ConsoleHelper.HeaderLine(true);
                     else
                     {
-                        "No messages found - waiting 10 seconds ... (ctrl+c to quit)".AsInlineBanner(ConsoleColor.DarkYellow);
+                        ConsoleHelper.HeaderLine(light);
+                        "No messages found - waiting 10 seconds ... (ctrl+c to quit)".AsBanner(ConsoleColor.DarkYellow, true);
+                        Console.WriteLine();
                         System.Threading.Thread.Sleep(10000);
                     }
                 }

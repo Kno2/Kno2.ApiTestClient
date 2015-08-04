@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using Kno2.ApiTestClient.Core.Extensions;
+using Kno2.ApiTestClient.Core.MessageHandlers;
 using Kno2.ApiTestClient.Core.Resources;
 using Newtonsoft.Json;
 
@@ -31,7 +32,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
 
 
             var accessTokenHandler = new AccessTokenHandler(new Uri(baseUri, authUri), clientId, clientSecret, appId);
-            HttpClient httpClient = HttpClientFactory.Create(accessTokenHandler);
+            HttpClient httpClient = HttpClientFactory.Create(new LogHandler(), accessTokenHandler);
             httpClient.BaseAddress = baseUri;
             //var httpClient = new HttpClient(refreshTokenHandler) { BaseAddress = baseUri };
             (" √ http client created  » " + baseUri).ToConsole();
@@ -109,7 +110,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
 
 
             // Persit the tokens
-            authResponse.SetTokens(httpClient.DefaultMediaType());
+            authResponse.Save(httpClient.DefaultMediaType());
 
 
 
