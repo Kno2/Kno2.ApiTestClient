@@ -12,22 +12,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
         {
             using (var output = File.AppendText(("api.log").AsAppPath()))
             {
-                await output.WriteLineAsync(string.Format("{0} {1}", source.Method.Method, source.RequestUri.PathAndQuery));
-            }
-        }
-
-        public static async void WriteApiEntry(this Uri source, List<KeyValuePair<string, string>> nameValueCollection)
-        {
-            var stringBuilder = new StringBuilder();
-            foreach (var keyValuePair in nameValueCollection)
-            {
-                stringBuilder.Append(" " + keyValuePair.Key + ":" + keyValuePair.Value);
-            }
-
-            using (var output = File.AppendText(("api.log").AsAppPath()))
-            {
-                var value = source.PathAndQuery + " " + stringBuilder;
-                await output.WriteLineAsync(value.Trim());
+                await output.WriteLineAsync(string.Format("{0} {1} {2}", DateTime.Now.ToString("s"), source.Method.Method, source.RequestUri.PathAndQuery));
             }
         }
 
@@ -41,7 +26,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
 
             using (var output = File.AppendText(("api.log").AsAppPath()))
             {
-                var value = string.Format("{0} {1} {2}", source.Method.Method, source.RequestUri.PathAndQuery, stringBuilder);
+                var value = string.Format("{0} {1} {2} {3}", DateTime.Now.ToString("s"), source.Method.Method, source.RequestUri.PathAndQuery, stringBuilder);
                 await output.WriteLineAsync(value.Trim());
             }
         }
