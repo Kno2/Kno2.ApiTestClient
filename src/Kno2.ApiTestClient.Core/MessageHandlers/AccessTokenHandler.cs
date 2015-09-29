@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -34,6 +35,8 @@ namespace Kno2.ApiTestClient.Core.MessageHandlers
             httpRequestMessage.Headers.Add("appid", _appId);
             HttpResponseMessage httpResponseMessage;
 
+            // Determine what type of token request to make (if needed) based on tracking
+            // the timestamps of the access token and the state of the local token
             switch (token.TokenRequestType)
             {
                 case TokenRequestType.None:
@@ -81,9 +84,28 @@ namespace Kno2.ApiTestClient.Core.MessageHandlers
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic",
                 Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", _clientId, _clientSecret))));
 
-            request.WriteApiEntry(nameValueCollection);
-            HttpResponseMessage httpResponseMessage = await base.SendAsync(request, cancellationToken);
-            return httpResponseMessage;
+            var corrId = string.Format("{0}{1}", DateTime.Now.Ticks, Thread.CurrentThread.ManagedThreadId);
+            var requestInfo = string.Format("{0} {1}", request.Method, request.RequestUri);
+
+            byte[] requestMessage = null;
+
+            if (request.Content != null)
+                requestMessage = await request.Content.ReadAsByteArrayAsync();
+
+            await IncommingMessageAsync(corrId, requestInfo, requestMessage);
+
+            HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
+
+            byte[] responseMessage;
+
+            if (response.IsSuccessStatusCode)
+                responseMessage = await response.Content.ReadAsByteArrayAsync();
+            else
+                responseMessage = Encoding.UTF8.GetBytes(response.ReasonPhrase);
+
+            await OutgoingMessageAsync(corrId, requestInfo, responseMessage);
+
+            return response;
         }
 
         private async Task<HttpResponseMessage> RefreshTokenRequest(HttpRequestMessage request, string refreshToken, CancellationToken cancellationToken)
@@ -94,11 +116,65 @@ namespace Kno2.ApiTestClient.Core.MessageHandlers
                 new KeyValuePair<string, string>("client_id", _clientId),
                 new KeyValuePair<string, string>("refresh_token", refreshToken)
             };
+
             request.Content = new FormUrlEncodedContent(nameValueCollection);
 
-            request.WriteApiEntry(nameValueCollection);
-            HttpResponseMessage httpResponseMessage = await base.SendAsync(request, cancellationToken);
-            return httpResponseMessage;
+            var requestId = string.Format("{0}{1}", DateTime.Now.Ticks, Thread.CurrentThread.ManagedThreadId);
+            var requestInfo = string.Format("{0} {1}", request.Method, request.RequestUri);
+
+            byte[] requestMessage = null;
+
+            if (request.Content != null)
+                requestMessage = await request.Content.ReadAsByteArrayAsync();
+
+            await IncommingMessageAsync(requestId, requestInfo, requestMessage);
+
+            HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
+
+            byte[] responseMessage;
+
+            if (response.IsSuccessStatusCode)
+                responseMessage = await response.Content.ReadAsByteArrayAsync();
+            else
+                responseMessage = Encoding.UTF8.GetBytes(response.ReasonPhrase);
+
+            await OutgoingMessageAsync(requestId, requestInfo, responseMessage);
+
+            return response;
+        }
+
+        private async Task IncommingMessageAsync(string correlationId, string requestInfo, byte[] message)
+        {
+            using (var output = File.AppendText(("api.log").AsAppPath()))
+            {
+                if (message == null)
+                {
+                    await output.WriteLineAsync(string.Format("{0} - Request: {1}", correlationId, requestInfo));
+                }
+                else
+                {
+                    await
+                        output.WriteLineAsync(string.Format("{0} - Request: {1}\r\n{2}", correlationId, requestInfo,
+                            Encoding.UTF8.GetString(message)));
+                }
+            }
+        }
+
+        private async Task OutgoingMessageAsync(string correlationId, string requestInfo, byte[] message)
+        {
+            using (var output = File.AppendText(("api.log").AsAppPath()))
+            {
+                if (message == null)
+                {
+                    await output.WriteLineAsync(string.Format("{0} - Response: {1}", correlationId, requestInfo));
+                }
+                else
+                {
+                    await
+                        output.WriteLineAsync(string.Format("{0} - Response: {1}\r\n{2}", correlationId, requestInfo,
+                            Encoding.UTF8.GetString(message)));
+                }
+            }
         }
     }
 }

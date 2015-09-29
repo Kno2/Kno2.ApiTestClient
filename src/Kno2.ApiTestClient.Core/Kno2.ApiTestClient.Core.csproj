@@ -55,6 +55,7 @@
     <Compile Include="Extensions\ConsoleExtensions.cs" />
     <Compile Include="Extensions\HttpClientExensions.cs" />
     <Compile Include="FileType.cs" />
+    <Compile Include="Helpers\MessageLoggingHandler.cs" />
     <Compile Include="Helpers\TokenRequestType.cs" />
     <Compile Include="Helpers\ApiHelper.cs" />
     <Compile Include="Helpers\ConsoleHelper.cs" />
@@ -64,9 +65,7 @@
     <Compile Include="Helpers\HttpClientHelper.cs" />
     <Compile Include="Helpers\MediaType.cs" />
     <Compile Include="Helpers\TokenHelpers.cs" />
-    <Compile Include="Helpers\UriLoggingExtensions.cs" />
     <Compile Include="MessageHandlers\AccessTokenHandler.cs" />
-    <Compile Include="MessageHandlers\LogHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Attachment.cs" />
     <Compile Include="Resources\AuthResponse.cs" />

@@ -16,14 +16,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using Formatting = System.Xml.Formatting;
 
 namespace Kno2.ApiTestClient.Core.Helpers
 {
-    public class ApiHelper
+    public static class ApiHelper
     {
         /// <summary>
-        /// Creates a http client reqeust using a simple c# anonymous object that is serialized into
+        /// Creates a http client requeset using a simple c# anonymous object that is serialized into
         /// a string content object and sent to a API endpoint expecting a application/json media type
         /// </summary>
         /// <param name="httpClient">Existing http client object setup with auth headers</param>
@@ -31,15 +30,15 @@ namespace Kno2.ApiTestClient.Core.Helpers
         /// <returns></returns>
         public static MessageResource RequestMessageDraft(HttpClient httpClient, Uri messageUri)
         {
-            // Make a POST request to the draft id endpoint.  It will return a draft id response as a bare string.
+            // Make a PUT request to the draft id endpoint.  It will return a draft id response as a bare string.
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.PutAsync(messageUri, null).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
             string responseJson = result.Content.ReadAsStringAsync().Result;
             WriteTimingOutput("making draft id request against", messageUri, stopwatch.ElapsedMilliseconds);
 
-            return Deserialize<MessageResource>(responseJson, HttpClientExtensions.DefaultMediaType(httpClient));
+            return Deserialize<MessageResource>(responseJson, httpClient.DefaultMediaType());
         }
 
         /// <summary>
@@ -54,18 +53,27 @@ namespace Kno2.ApiTestClient.Core.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.GetAsync(documentTypesUri).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
             string responseJson = result.Content.ReadAsStringAsync().Result;
             WriteTimingOutput("making draft id request against", result.RequestMessage.RequestUri, stopwatch.ElapsedMilliseconds);
 
 
-            var documentTypesResource = Deserialize<DocumentTypesResource>(responseJson, HttpClientExtensions.DefaultMediaType(httpClient));
+            var documentTypesResource = Deserialize<DocumentTypesResource>(responseJson, httpClient.DefaultMediaType());
 
             (" √ parsing response - document types found » " + documentTypesResource.DocumentTypes.Count()).ToConsole();
 
             return documentTypesResource.DocumentTypes.Select(x => x.Name);
         }
 
+        /// <summary>
+        /// Creates a http request that will upload a file binary to an existing MessageResource draft.  The payload
+        /// also includes information about the attachment or metadata
+        /// </summary>
+        /// <param name="httpClient"></param>
+        /// <param name="attachmentsUri"></param>
+        /// <param name="fileName"></param>
+        /// <param name="attachment"></param>
+        /// <returns></returns>
         public static AttachmentResource UploadAttachment(HttpClient httpClient, Uri attachmentsUri, string fileName, AttachmentResource attachment)
         {
             (" √ creating attachment metadata for file » " + attachment.NativeFileName).ToConsole();
@@ -76,8 +84,8 @@ namespace Kno2.ApiTestClient.Core.Helpers
             
 
 
-            string serializeObject = Serialize<AttachmentMetaResource>(attachment.AttachmentMeta, HttpClientExtensions.DefaultMediaType(httpClient));
-            (" √ serializing request object to " + HttpClientExtensions.DefaultMediaType(httpClient)).ToConsole();
+            string serializeObject = Serialize<AttachmentMetaResource>(attachment.AttachmentMeta, httpClient.DefaultMediaType());
+            (" √ serializing request object to " + httpClient.DefaultMediaType()).ToConsole();
             
 
 
@@ -89,8 +97,8 @@ namespace Kno2.ApiTestClient.Core.Helpers
 
             // Using the StringContent (https://msdn.microsoft.com/System.Net.Http.StringContent) class to encode
             //  and setup the required mime type for this endpoint
-            var contentString = new StringContent(serializeObject, Encoding.UTF8, HttpClientExtensions.DefaultMediaType(httpClient).Description());
-            string.Format(" √ creating request content (string) object using as {0}", HttpClientExtensions.DefaultMediaType(httpClient).Description()).ToConsole();
+            var contentString = new StringContent(serializeObject, Encoding.UTF8, httpClient.DefaultMediaType().Description());
+            string.Format(" √ creating request content (string) object using as {0}", httpClient.DefaultMediaType().Description()).ToConsole();
 
 
 
@@ -110,103 +118,17 @@ namespace Kno2.ApiTestClient.Core.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.PostAsync(attachmentsUri, multipartContent).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
             string responseJson = result.Content.ReadAsStringAsync().Result;
             WriteTimingOutput("making attachment upload request against", attachmentsUri, stopwatch.ElapsedMilliseconds);
 
 
-            var attachmentResource = Deserialize<AttachmentResource>(responseJson, HttpClientExtensions.DefaultMediaType(httpClient));
+            var attachmentResource = Deserialize<AttachmentResource>(responseJson, httpClient.DefaultMediaType());
 
 
             (" √ sent " + attachment.NativeFileBytes.Length + " bytes To API").ToConsole();
 
             return attachmentResource;
-        }
-
-        /// <summary>
-        /// Creates a http request that will upload a file binary to an existing MessageResource draft.  The payload
-        /// also includes information about the attachment or metadata
-        /// </summary>
-        /// <param name="httpClient">Existing http client object setup with auth headers</param>
-        /// <param name="attachmentsUri"></param>
-        /// <param name="draftId"></param>
-        /// <param name="confidentiality"></param>
-        /// <param name="documentType"></param>
-        /// <param name="documentDate"></param>
-        /// <param name="documentDescription"></param>
-        /// <param name="attachmentBytes"></param>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        public static long UploadAttachment(HttpClient httpClient, Uri attachmentsUri, long draftId, Confidentiality confidentiality, string documentType,
-            DateTime documentDate, string documentDescription, byte[] attachmentBytes, string fileName)
-        {
-            // This is an example of using a specific Uri resource.
-            Uri attachmentResource = new Uri(string.Format("{0}/{1}", attachmentsUri, draftId), UriKind.Relative);
-
-            // Creating anonymous object that represents the miminum required fields for the attachment metadata
-            //  Confidentiality required a 0 - Normal, 1 - Restricted or 3 - Very Restricted
-            var attachmentMetadata = new
-            {
-                confidentiality = (Int32)confidentiality,
-                documentType = documentType,
-                documentDate = documentDate,
-                documentDescription = documentDescription
-            };
-            (" √ creating attachment metadata for file » " + fileName).ToConsole();
-            ("   + confidentiality » " + confidentiality).ToConsole();
-            ("   + documentType » " + documentType).ToConsole();
-            ("   + documentDate » " + documentDate).ToConsole();
-            ("   + documentDescription » " + documentDescription).ToConsole();
-
-
-
-            // Using Json.Net (http://www.nuget.org/packages/Newtonsoft.Json/) we serialize the object into
-            //  a json string
-            string serializeObject = JsonConvert.SerializeObject(attachmentMetadata);
-            (" √ serializing request object to json").ToConsole();
-
-
-
-            // This API requires a POST of both text based and binary data using MultipartContent
-            //  https://msdn.microsoft.com/System.Net.Http.MultipartContent
-            var multipartContent = new MultipartFormDataContent();
-
-
-
-            // Using the StringContent (https://msdn.microsoft.com/System.Net.Http.StringContent) class to encode
-            //  and setup the required mime type for this endpoint
-            var contentString = new StringContent(serializeObject, Encoding.UTF8, "application/json");
-            (" √ creating request content (string) object using json, UTF-8 encoding and\r\n     application/json media type").ToConsole();
-
-
-
-            // Using the ByteArrayContent (https://msdn.microsoft.com/System.Net.Http.ByteArrayContent) class to encode
-            //  and setup the required array buffer
-            ByteArrayContent byteArrayContent = new ByteArrayContent(attachmentBytes, 0, attachmentBytes.Length);
-
-
-
-            // Add the two content httpcontent based instances to the collection to be sent up to the API
-            multipartContent.Add(contentString);
-            multipartContent.Add(byteArrayContent, fileName, fileName);
-
-
-
-            // Make a POST request to the draft id endpoint.  It will return a draft id response as a bare string.
-            //  (example is also showing some simple timing diagnostics)
-            var stopwatch = new Stopwatch(); stopwatch.Start();
-            HttpResponseMessage result = httpClient.PostAsync(attachmentResource, multipartContent).Result;
-            HttpClientExensions.CheckStatus(result);
-            string responseJson = result.Content.ReadAsStringAsync().Result;
-            WriteTimingOutput("making attachment upload request against", attachmentsUri, stopwatch.ElapsedMilliseconds);
-
-            (" √ sent " + attachmentBytes.Length + " bytes To API").ToConsole();
-
-            // Parse the metadata response to extract the attachment id
-            JToken jToken = JObject.Parse(responseJson);
-            long attachmentId = Convert.ToInt64((string) jToken.SelectToken("attachmentId").Value<string>());
-
-            return attachmentId;
         }
 
         /// <summary>
@@ -221,7 +143,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.GetAsync(attachmentsUri).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
             var fileBytes = result.Content.ReadAsStringAsync().Result;
             WriteTimingOutput("making attachment request against", attachmentsUri, stopwatch.ElapsedMilliseconds);
 
@@ -237,18 +159,19 @@ namespace Kno2.ApiTestClient.Core.Helpers
         /// </summary>
         /// <param name="httpClient">Existing http client object setup with auth headers</param>
         /// <param name="attachmentsUri"></param>
+        /// <param name="mediaType"></param>
         /// <returns>byte[]</returns>
-        public static byte[] RequestAttachment(HttpClient httpClient, Uri attachmentsUri, string mimeType)
+        public static byte[] RequestAttachment(HttpClient httpClient, Uri attachmentsUri, string mediaType)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, attachmentsUri);
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(mimeType));
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(mediaType));
 
 
             // Make a GET request to the document request endpoint.  It will return a collection of document types.
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.SendAsync(request).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
             var fileBytes = result.Content.ReadAsByteArrayAsync().Result;
             WriteTimingOutput("making attachment request against", attachmentsUri, stopwatch.ElapsedMilliseconds);
 
@@ -276,7 +199,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.GetAsync(documentsMessagesUri).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
             string responseJson = result.Content.ReadAsStringAsync().Result;
             WriteTimingOutput("making unprocessed intake messages request against", resource, stopwatch.ElapsedMilliseconds);
             NameValueCollection queryString = resource.ParseQueryString();
@@ -311,7 +234,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
             (" √ serializing request object to " + HttpClientExtensions.DefaultMediaType(httpClient)).ToConsole();
 
             HttpResponseMessage result = httpClient.PutAsync(messageUri, new StringContent(serializeObject, Encoding.UTF8, HttpClientExtensions.DefaultMediaType(httpClient).Description())).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
         }
 
 
@@ -327,7 +250,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
             (" √ serializing request object to " + HttpClientExtensions.DefaultMediaType(httpClient)).ToConsole();
 
             HttpResponseMessage result = httpClient.PostAsync(messageSendUri, new StringContent(serializeObject, Encoding.UTF8, HttpClientExtensions.DefaultMediaType(httpClient).Description())).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
         }
 
         /// <summary>
@@ -351,7 +274,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
             uriBuilder.Query = queryParameters;
 
             HttpResponseMessage result = httpClient.GetAsync(uriBuilder.Uri).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
             string responseJson = result.Content.ReadAsStringAsync().Result;
 
             JObject jObject = JObject.Parse(responseJson);
@@ -382,7 +305,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
             //  (example is also showing some simple timing diagnostics)
             var stopwatch = new Stopwatch(); stopwatch.Start();
             HttpResponseMessage result = httpClient.GetAsync(messageUri).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
             WriteTimingOutput("making document request MessageResource request against", messageUri, stopwatch.ElapsedMilliseconds);
             string responseJson = result.Content.ReadAsStringAsync().Result;
 
@@ -420,7 +343,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             HttpResponseMessage result = httpClient.SendAsync(httpRequestMessage).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
             WriteTimingOutput("making attachment read event request against", messageReadEventUri, stopwatch.ElapsedMilliseconds);
         }
 
@@ -431,7 +354,7 @@ namespace Kno2.ApiTestClient.Core.Helpers
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             HttpResponseMessage result = httpClient.PutAsync(attachmentReadUri, null).Result;
-            HttpClientExensions.CheckStatus(result);
+            result.CheckStatus();
             WriteTimingOutput("making attachment read event request against", attachmentReadUri, stopwatch.ElapsedMilliseconds);
         }
 

@@ -115,7 +115,7 @@ namespace Kno2.ApiTestClient.Download
                             ("Requesting Native Attachment File Data " + attachment.NativeFileName).AsBanner(light, true, false);
                             byte[] fileBytes = ApiHelper.RequestAttachment(httpClient: httpClient,
                                                    attachmentsUri: apiConfig.AttachmentsUri(messageId: retrievedMessage.Id, attachmentId: attachment.Id),
-                                                   mimeType: "application/octet-stream");
+                                                   mediaType: "application/octet-stream");
                             attachment.NativeFileBytes = fileBytes;
                             // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                             // Save the file bytes as per the nativeFileName metadata field
@@ -147,7 +147,7 @@ namespace Kno2.ApiTestClient.Download
                             ("Requesting PDF Converted Attachment File Data " + attachment.PdfFileName).AsBanner(light, true, false);
                             byte[] fileBytes = ApiHelper.RequestAttachment(httpClient: httpClient,
                                                    attachmentsUri: apiConfig.AttachmentsUri(messageId: retrievedMessage.Id, attachmentId: attachment.Id),
-                                                   mimeType: "application/pdf");
+                                                   mediaType: "application/pdf");
                             attachment.PdfFileBytes = fileBytes;
                             // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                             // Save the file bytes as per the nativeFileName metadata field
