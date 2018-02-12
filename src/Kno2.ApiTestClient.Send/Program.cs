@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using Kno2.ApiTestClient.Core;
 using Kno2.ApiTestClient.Core.Helpers;
@@ -15,6 +16,14 @@ namespace Kno2.ApiTestClient.Send
         {
             try
             {
+
+                // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                // Needed for .Net Framework < 4.6.1
+                // Enable TLS SecurityProtocol to default to TLS 1.2
+                // UnComment the following line if you are  unable to upgrade to .Net 4.6.1 or greater
+                // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                // ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                 // Initialize the configuration data
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

@@ -1,6 +1,13 @@
 # Kno2.ApiTestClient
 Kno2 API Test client for integrators
 
+## Security Notes
+Kno2 recommends all integrations and partners utilize TLS 1.2 or higher. This client has been updated to utilize TLS 1.2 by upgrading/targetting .Net 4.6.1
+
+If an integration is unable to target .Net 4.6.1 or higher, utilizing the following code snippet will work for .Net 4.5 projects. Note TLS 1.2 is not supported on .Net 4.0 or below.
+
+`ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;`
+
 ## How to build ##
 The included build system requires a windows machine running Powershell v3 or
 later.
