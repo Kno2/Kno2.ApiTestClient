@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Runtime.Serialization.Formatters;
 using Kno2.ApiTestClient.Core;
@@ -17,6 +18,14 @@ namespace Kno2.ApiTestClient.Download
         {
             try
             {
+
+                // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                // Needed for .Net Framework < 4.6.1
+                // Enable TLS SecurityProtocol to default to TLS 1.2
+                // UnComment the following line if you are  unable to upgrade to .Net 4.6.1 or greater
+                // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                // ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
                 // Initialize the configuration data
                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
