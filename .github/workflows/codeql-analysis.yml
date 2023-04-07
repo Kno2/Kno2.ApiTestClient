@@ -39,13 +39,7 @@ jobs:
     
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
-      
-    - name: Adjust NuGet Config Credentials
-      run: |
-        mv nuget.ci.config nuget.config
-        (Get-Content nuget.config) -replace '\${USER}', "${{ secrets.TC_NUGET_USER }}" -replace '\${PAT}', "${{ secrets.TC_NUGET_PASSWORD }}" -replace '\${GH_PAT}', "${{ secrets.GHACTION_REPO }}" | Out-File nuget.config
-    
-             
+                  
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
